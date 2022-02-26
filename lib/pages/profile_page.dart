@@ -80,7 +80,7 @@ class _ProfilePageState extends State<ProfilePage> {
   // Widget builds the display item with the proper formatting to display the user's info
   Widget buildUserInfoDisplay(String title) =>
       Padding(
-          padding: EdgeInsets.only(bottom: 1),
+          padding: EdgeInsets.only(bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

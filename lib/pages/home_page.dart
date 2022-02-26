@@ -7,6 +7,7 @@ import 'package:mero_futsal/models/futsal_arenas.dart';
 import 'package:mero_futsal/pages/favorite_page.dart';
 import 'package:mero_futsal/pages/mycart_page.dart';
 import 'package:mero_futsal/pages/profile_page.dart';
+import 'package:mero_futsal/pages/team_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -141,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage>
                 child: TabBarView(controller: _controller, children: [
                   _buildlistitem(items: allArenas),
                   ProfilePage(),
-                  ProfilePage(),
+                  team(),
                 ]),
               ),
               const SizedBox(

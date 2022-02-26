@@ -189,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Center(
                     child: RichText(
                       text: TextSpan(
-                        text: "Dont have an account? ",
+                        text: "Don't have an account? ",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
