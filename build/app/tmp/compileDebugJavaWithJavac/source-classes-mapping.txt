@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/example/mero_futsal/BuildConfig.java
+ com.example.mero_futsal.BuildConfig
