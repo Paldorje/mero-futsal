@@ -4,7 +4,11 @@ import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
 
 const kBottomContainerHeight = 200.0;
-const kBottomContainerColor = Color(0xFFE81E63);
+const kPlayerButtonColor = Color(0xFFE81E63);
+const kOwnerButtonColor = Color(0xFF4440FA);
+
+const kPlayerLoginText = 'Login as Player';
+const kOwnerLoginText = 'Login as Owner';
 
 const kLargeButtonTextStyle = TextStyle(
   fontSize: 25.0,

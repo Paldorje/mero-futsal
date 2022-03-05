@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/cart_model.dart';
-import 'package:mero_futsal/pages/home_page.dart';
+import 'package:mero_futsal/pages/playerHome_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartModel> cartModel;
@@ -204,7 +204,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           bookedGround.clear();
           total = 0.0;
           Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (_) => const MyHomePage()));
+              MaterialPageRoute(builder: (_) => MyHomePage()));
         },
         btnOkColor: Colors.green,
         buttonsBorderRadius: BorderRadius.circular(20))

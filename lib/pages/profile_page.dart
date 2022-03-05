@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:mero_futsal/pages/login_page.dart';
+import 'package:mero_futsal/pages/playerLogin_page.dart';
 // import 'package:flutter_user_profile/pages/edit_description.dart';
 // import 'package:flutter_user_profile/pages/edit_email.dart';
 // import 'package:flutter_user_profile/pages/edit_image.dart';
@@ -54,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => PlayerLoginPage()),
                         (Route<dynamic> route) => false,
                   );
                 }),

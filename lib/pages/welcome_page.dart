@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
 import 'package:mero_futsal/components/introduction_pages.dart';
-import 'package:mero_futsal/pages/login_page.dart';
+import 'package:mero_futsal/pages/users_page.dart';
 
 
 
 class AnimatedIntroductionSlider extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AnimatedIntroductionSlider extends StatelessWidget {
             ),),
           onTapDoneButton: () {
             Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage(),),);
+                        MaterialPageRoute(builder: (context) => UsersPage(),),);
           },
           pageButtonTextStyles:const TextStyle(
             color: Colors.blue,

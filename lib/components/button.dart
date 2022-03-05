@@ -17,7 +17,7 @@ class Button extends StatelessWidget {
               buttonTitle,
               style:kLargeButtonTextStyle),
         ),
-        color: kBottomContainerColor,
+        color: kPlayerButtonColor,
         margin: const EdgeInsets.all(9.0),
         padding: const EdgeInsets.all(20.0),
         height: kBottomContainerHeight,
