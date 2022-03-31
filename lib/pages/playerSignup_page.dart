@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_futsal/models/api.services.dart';
+import 'package:mero_futsal/models/user.dart';
 import 'package:mero_futsal/pages/playerLogin_page.dart';
-import '../components/authentication.dart';
-import 'package:flutter/services.dart';
 
 class PlayerSignupPage extends StatefulWidget {
 
@@ -38,8 +37,10 @@ class SignupPageContent extends StatefulWidget {
   State<StatefulWidget> createState() => _SignupPageContent();
 }
 
+
 class _SignupPageContent extends State<SignupPageContent> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
   TextEditingController passwordController2 = TextEditingController();
   bool _isVisible = false;
@@ -47,11 +48,14 @@ class _SignupPageContent extends State<SignupPageContent> {
   bool _isObscure2 = true;
   String returnVisibilityString = "";
 
-  bool returnVisibility(String password1, String password2, String username) {
+  bool returnVisibility(String name, String password1, String password2, String email) {
     if (password1 != password2) {
       returnVisibilityString = "Passwords do not match";
-    } else if (username == "") {
-      returnVisibilityString = "Username cannot be empty";
+    }
+    else if (name == "") {
+      returnVisibilityString = "Name cannot be empty";
+    }else if (email == "") {
+      returnVisibilityString = "Email cannot be empty";
     } else if (password1 == "" || password2 == "") {
       returnVisibilityString = "Password fields cant be empty";
     } else if (!auth.isPasswordCompliant(password1)) {
@@ -77,7 +81,7 @@ class _SignupPageContent extends State<SignupPageContent> {
           // Signup Text
           Center(
             child: Container(
-              height: 245,
+              height: 225,
               width: 400,
               alignment: Alignment.center,
               child: Text(
@@ -109,10 +113,10 @@ class _SignupPageContent extends State<SignupPageContent> {
               ),
             ),
           ),
-
+          
           // Signup Info
           Container(
-            height: 215,
+            height: 265,
             width: 530,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -125,11 +129,27 @@ class _SignupPageContent extends State<SignupPageContent> {
                       _isVisible = false;
                     });
                   },
-                  controller: usernameController, // Controller for Username
+                  controller: emailController, // Controller for Email
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Username",
-                      contentPadding: EdgeInsets.all(20)),
+                      hintText: "Full Name",
+                      contentPadding: EdgeInsets.all(17)),
+                  onEditingComplete: () => FocusScope.of(context).nextFocus(),
+                ),
+                Divider(
+                  thickness: 3,
+                ),
+                TextFormField(
+                  onTap: () {
+                    setState(() {
+                      _isVisible = false;
+                    });
+                  },
+                  controller: emailController, // Controller for Email
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "Email",
+                      contentPadding: EdgeInsets.all(17)),
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 ),
                 Divider(
@@ -146,7 +166,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Password",
-                      contentPadding: EdgeInsets.all(20),
+                      contentPadding: EdgeInsets.all(17),
                       // Adding the visibility icon to toggle visibility of the password field
                       suffixIcon: IconButton(
                         icon: Icon(_isObscure1
@@ -174,7 +194,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Re-enter Password",
-                      contentPadding: EdgeInsets.all(20),
+                      contentPadding: EdgeInsets.all(17),
                       // Adding the visibility icon to toggle visibility of the password field
                       suffixIcon: IconButton(
                         icon: Icon(_isObscure2
@@ -203,20 +223,29 @@ class _SignupPageContent extends State<SignupPageContent> {
                 onPressed: () async {
                   if (kDebugMode) {
                     print(
-                        "Username: ${usernameController
+                        "Email: ${emailController
                             .text}\npassword: ${passwordController1
                             .text}\nretry password ${passwordController2
                             .text}");
                   }
 
-                  if (usernameController.text != "" &&
+                  if (emailController.text != "" &&
                       passwordController1.text == passwordController2.text &&
                       passwordController2.text != "" &&
                       auth.isPasswordCompliant(passwordController1.text)) {
-                    print("I got in here");
-                    if (!auth.checkUserRepeat(usernameController.text)) {
+
+                    if (!auth.checkUserRepeat(emailController.text)) {
                       auth.insertCredentials(
-                          usernameController.text, passwordController1.text);
+                          emailController.text, passwordController1.text);
+
+                      User user = new User(
+                          name:emailController.text,
+                          password:passwordController1.text, address: 'we', phone: '1283912', email: 'we@gmail.com',isDeleted: false, isAvailable: true
+                      );
+
+                      await APIServices.postUser(user);
+                      print("I got in here");
+
 
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => PlayerLoginPage()),
@@ -224,14 +253,14 @@ class _SignupPageContent extends State<SignupPageContent> {
                       );
                     } else {
                       setState(() {
-                        returnVisibilityString = "Username already exists";
+                        returnVisibilityString = "Email already exists";
                         _isVisible = true;
                       });
                     }
                   } else {
                     setState(() {
-                      _isVisible = returnVisibility(passwordController1.text,
-                          passwordController2.text, usernameController.text);
+                      _isVisible = returnVisibility(nameController.text, passwordController1.text,
+                          passwordController2.text, emailController.text);
                     });
                   }
                 }),

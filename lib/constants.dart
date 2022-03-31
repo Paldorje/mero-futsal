@@ -12,6 +12,7 @@ const kOwnerLoginText = 'Login as Owner';
 
 const kLargeButtonTextStyle = TextStyle(
   fontSize: 25.0,
+  letterSpacing: 2,
   fontWeight: FontWeight.bold,
 );
 

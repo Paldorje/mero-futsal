@@ -47,7 +47,7 @@ class _MyCartState extends State<MyFavorite> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
-                    height: _screenheight * .8,
+                    height: _screenheight * .75,
                     child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
                         itemCount: favouriteArenas.length,

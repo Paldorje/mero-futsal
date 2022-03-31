@@ -1,12 +1,8 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/details_page.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
-import 'package:mero_futsal/pages/editDetails_page.dart';
 import 'package:mero_futsal/pages/mycart_page.dart';
 import 'package:mero_futsal/pages/profile_page.dart';
-import 'package:mero_futsal/pages/team_page.dart';
 
 class OwnerHomePage extends StatefulWidget {
 
@@ -44,7 +40,7 @@ class _OwnerHomePageState extends State<OwnerHomePage>
             child: Center(
               child: Text(
                 'Mero Futsal',
-                style: style.copyWith(color: Colors.white, fontSize: 16),
+                style: style.copyWith(color: Colors.white, fontSize: 18, letterSpacing: 1.5),
               ),
             ),
           ),
@@ -78,7 +74,8 @@ class _OwnerHomePageState extends State<OwnerHomePage>
                 height: 15,
               ),
               Expanded(
-                child: TabBarView(controller: _controller, children: [
+                child:
+                TabBarView(controller: _controller, children: [
                   _buildlistitem(items: allArenas),
                   ProfilePage(),
                   MyCart(),
@@ -96,30 +93,14 @@ class _OwnerHomePageState extends State<OwnerHomePage>
 
   Widget _buildlistitem({required List<FutsalArenas> items}) {
     return ListView.builder(
-        physics: const BouncingScrollPhysics(),
         itemCount: 1,
         itemBuilder: (context, index) {
-          return index % 2 == 0
-              ? BounceInLeft(
-              duration: const Duration(milliseconds: 1000),
-              child: _builditem(myitems: items, index: index))
-              : BounceInRight(
-              duration: const Duration(milliseconds: 1000),
-              child: _builditem(myitems: items, index: index));
+          return  _builditem(myitems: items, index: index);
         });
   }
 
   Widget _builditem({required List<FutsalArenas> myitems, required int index}) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => EditDetailsPage(
-                  item: myitems[index],
-                )));
-      },
-      child: AspectRatio(
+    return AspectRatio(
         aspectRatio: 3 / 2.3,
         child: Container(
           margin: const EdgeInsets.all(15),
@@ -167,7 +148,7 @@ class _OwnerHomePageState extends State<OwnerHomePage>
                     Text(
                       '${myitems[index].price} \$',
                       style: style.copyWith(
-                          fontSize: 22, fontWeight: FontWeight.bold),
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -175,7 +156,6 @@ class _OwnerHomePageState extends State<OwnerHomePage>
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

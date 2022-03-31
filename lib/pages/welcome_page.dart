@@ -19,6 +19,10 @@ class AnimatedIntroductionSlider extends StatelessWidget {
       home: Builder(
         builder: (context) => IntroViewsFlutter(
           pages,
+          onTapSkipButton: () {
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => UsersPage(),),);
+          },
           doneText: Text('LETS GET STARTED',
             style: TextStyle(
               color: Colors.red.shade800,

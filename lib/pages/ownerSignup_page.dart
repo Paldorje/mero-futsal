@@ -39,7 +39,7 @@ class SignupPageContent extends StatefulWidget {
 }
 
 class _SignupPageContent extends State<SignupPageContent> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
   TextEditingController passwordController2 = TextEditingController();
   bool _isVisible = false;
@@ -47,11 +47,11 @@ class _SignupPageContent extends State<SignupPageContent> {
   bool _isObscure2 = true;
   String returnVisibilityString = "";
 
-  bool returnVisibility(String password1, String password2, String username) {
+  bool returnVisibility(String password1, String password2, String email) {
     if (password1 != password2) {
       returnVisibilityString = "Passwords do not match";
-    } else if (username == "") {
-      returnVisibilityString = "Username cannot be empty";
+    } else if (email == "") {
+      returnVisibilityString = "Email cannot be empty";
     } else if (password1 == "" || password2 == "") {
       returnVisibilityString = "Password fields cant be empty";
     } else if (!auth.isPasswordCompliant(password1)) {
@@ -125,10 +125,10 @@ class _SignupPageContent extends State<SignupPageContent> {
                       _isVisible = false;
                     });
                   },
-                  controller: usernameController, // Controller for Username
+                  controller: emailController, // Controller for Email
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Username",
+                      hintText: "Email",
                       contentPadding: EdgeInsets.all(20)),
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 ),
@@ -203,20 +203,20 @@ class _SignupPageContent extends State<SignupPageContent> {
                 onPressed: () async {
                   if (kDebugMode) {
                     print(
-                        "Username: ${usernameController
+                        "Email: ${emailController
                             .text}\npassword: ${passwordController1
                             .text}\nretry password ${passwordController2
                             .text}");
                   }
 
-                  if (usernameController.text != "" &&
+                  if (emailController.text != "" &&
                       passwordController1.text == passwordController2.text &&
                       passwordController2.text != "" &&
                       auth.isPasswordCompliant(passwordController1.text)) {
                     print("I got in here");
-                    if (!auth.checkUserRepeat(usernameController.text)) {
+                    if (!auth.checkUserRepeat(emailController.text)) {
                       auth.insertCredentials(
-                          usernameController.text, passwordController1.text);
+                          emailController.text, passwordController1.text);
 
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => PlayerLoginPage()),
@@ -224,14 +224,14 @@ class _SignupPageContent extends State<SignupPageContent> {
                       );
                     } else {
                       setState(() {
-                        returnVisibilityString = "Username already exists";
+                        returnVisibilityString = "Email already exists";
                         _isVisible = true;
                       });
                     }
                   } else {
                     setState(() {
                       _isVisible = returnVisibility(passwordController1.text,
-                          passwordController2.text, usernameController.text);
+                          passwordController2.text, emailController.text);
                     });
                   }
                 }),

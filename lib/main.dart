@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'pages/welcome_page.dart';
-void main() => runApp(MeroFutsal());
+void main() {
+  runApp(MeroFutsal());
+  HttpOverrides.global = MyHttpOverrides();
+}
 
 // ignore: use_key_in_widget_constructors
 class MeroFutsal extends StatelessWidget {
@@ -14,5 +19,12 @@ class MeroFutsal extends StatelessWidget {
       ),
       home: AnimatedIntroductionSlider(),
     );
+  }
+}
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

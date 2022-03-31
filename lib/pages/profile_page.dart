@@ -1,15 +1,13 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:mero_futsal/models/api.services.dart';
+import 'package:mero_futsal/pages/ProfileEditPages/edit_address.dart';
+import 'package:mero_futsal/pages/ProfileEditPages/edit_email.dart';
+import 'package:mero_futsal/pages/ProfileEditPages/edit_image.dart';
+import 'package:mero_futsal/pages/ProfileEditPages/edit_name.dart';
+import 'package:mero_futsal/pages/ProfileEditPages/edit_phone.dart';
 import 'package:mero_futsal/pages/playerLogin_page.dart';
-// import 'package:flutter_user_profile/pages/edit_description.dart';
-// import 'package:flutter_user_profile/pages/edit_email.dart';
-// import 'package:flutter_user_profile/pages/edit_image.dart';
-// import 'package:flutter_user_profile/pages/edit_name.dart';
-// import 'package:flutter_user_profile/pages/edit_phone.dart';
-// import '../user/user.dart';
-// import '../widgets/display_image_widget.dart';
-// import '../user/user_data.dart';
+import '../widgets/display_image_widget.dart';
 
 // This class handles the Page to dispaly the user's info on the "Edit Profile" Screen
 class ProfilePage extends StatefulWidget {
@@ -20,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    // final user = UserData.myUser;
+    final user = APIServices.myUser;
 
     return Scaffold(
       body: Column(
@@ -30,21 +28,18 @@ class _ProfilePageState extends State<ProfilePage> {
             elevation: 0,
             toolbarHeight: 10,
           ),
-          Center(
-              child: Padding(
-                  padding: EdgeInsets.only(bottom: 40),
-                  child: Text(
-                    'My Profile',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(64, 105, 225, 1),
-                    ),
-                  ))),
-      buildProfile(),
-          buildUserInfoDisplay('Name'),
-          buildUserInfoDisplay( 'Phone'),
-          buildUserInfoDisplay( 'Email'),
+          InkWell(
+              onTap: () {
+                navigateSecondPage(EditImagePage());
+              },
+              child: DisplayImage(
+                imagePath: user.password,
+                onPressed: () {},
+              )),
+          buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
+          buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
+          buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
+          buildUserInfoDisplay(user.email, 'Address', EditAddressFormPage()),
           Center(
             child: ElevatedButton(
                 child: Text("Logout", style: TextStyle(color: Colors.white)),
@@ -59,73 +54,109 @@ class _ProfilePageState extends State<ProfilePage> {
                   );
                 }),
           ),
-          // InkWell(
-          //     onTap: () {
-          //       // navigateSecondPage(EditImagePage());
-          //     },
-          //     // child: DisplayImage(
-          //     //   imagePath: user.image,
-          //     //   onPressed: () {},
-          //     // ),
-          // ),
-          // Expanded(
-          //   child: buildAbout(user),
-          //   flex: 4,
-          // )
+
         ],
       ),
     );
   }
 
   // Widget builds the display item with the proper formatting to display the user's info
-  Widget buildUserInfoDisplay(String title) =>
-      Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey,
+  Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) =>
+      Expanded(
+        child: Padding(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.blue,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                  width: 350,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey,
-                            width: 1,
-                          ))),
-                  // child: Row(children: [
-                  //   Expanded(
-                  //       child: TextButton(
-                  //           onPressed: () {
-                  //             navigateSecondPage(editPage);
-                  //           },
-                  //           child: Text(
-                  //             getValue,
-                  //             style: TextStyle(fontSize: 16, height: 1.4),
-                  //           ))),
-                  //   Icon(
-                  //     Icons.keyboard_arrow_right,
-                  //     color: Colors.grey,
-                  //     size: 40.0,
-                  //   )
-                  // ])
-                )
-            ],
-          ));
+                SizedBox(
+                  height: 1,
+                ),
+                Container(
+                    width: 350,
+                    height: 40,
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(
+                      color: Colors.grey,
+                      width: 1,
+                    ))),
+                    child: Row(children: [
+                      Expanded(
+                          child: TextButton(
+                              onPressed: () {
+                                navigateSecondPage(editPage);
+                              },
+                              child: Text(
+                                getValue,
+                                style: TextStyle(fontSize: 16, height: 1.4, color: Colors.black),
+                              ))),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        color: Colors.grey,
+                        size: 40.0,
+                      )
+                    ]))
+              ],
+            )),
+      );
 
   // Widget builds the About Me Section
-  // Widget buildAbout() =>
+  // Widget buildAbout(User user) => Padding(
+  //     padding: EdgeInsets.only(bottom: 10),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(
+  //           'Tell Us About Yourself',
+  //           style: TextStyle(
+  //             fontSize: 15,
+  //             fontWeight: FontWeight.w500,
+  //             color: Colors.grey,
+  //           ),
+  //         ),
+  //         const SizedBox(height: 1),
+  //         Container(
+  //             width: 350,
+  //             height: 77,
+  //             decoration: BoxDecoration(
+  //                 border: Border(
+  //                     bottom: BorderSide(
+  //               color: Colors.grey,
+  //               width: 1,
+  //             ))),
+  //             child: Row(children: [
+  //               Expanded(
+  //                   child: TextButton(
+  //                       onPressed: () {
+  //                         navigateSecondPage(EditDescriptionFormPage());
+  //                       },
+  //                       child: Padding(
+  //                           padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+  //                           child: Align(
+  //                               alignment: Alignment.topLeft,
+  //                               child: Text(
+  //                                 user.address,
+  //                                 style: TextStyle(
+  //                                   fontSize: 16,
+  //                                   height: 1.4,
+  //                                 ),
+  //                               ))))),
+  //               Icon(
+  //                 Icons.keyboard_arrow_right,
+  //                 color: Colors.grey,
+  //                 size: 40.0,
+  //               )
+  //             ]))
+  //       ],
+  //     ));
 
   // Refrshes the Page after updating user info.
   FutureOr onGoBack(dynamic value) {
@@ -136,58 +167,5 @@ class _ProfilePageState extends State<ProfilePage> {
   void navigateSecondPage(Widget editForm) {
     Route route = MaterialPageRoute(builder: (context) => editForm);
     Navigator.push(context, route).then(onGoBack);
-  }
-}
-
-class buildProfile extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(bottom: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Your Informations',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Container(
-                width: 350,
-                height: 50,
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                          color: Colors.grey,
-                          width: 1,
-                        ))),
-                child: Row(children: [
-                  Expanded(
-                      child: TextButton(
-                          onPressed: () {
-                            // navigateSecondPage(EditDescriptionFormPage());
-                          },
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              child: Align(
-                                alignment: Alignment.topLeft,
-                                // child: Text(
-                                //   user.aboutMeDescription,
-                                //   style: TextStyle(
-                                //     fontSize: 16,
-                                //     height: 1.4,
-                                //   ),
-                                // )
-                              )))),
-
-                ],
-                ),
-            ),
-          ],
-        ));
   }
 }

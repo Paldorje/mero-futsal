@@ -10,6 +10,9 @@ class UsersPage extends StatelessWidget {
     var _screenheight = MediaQuery.of(context).size.height;
     var _screenwidth = MediaQuery.of(context).size.width;
 
+    String player = "Player";
+    String owner = "Owner";
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(40, 38, 56, 1),
       appBar: AppBar(
@@ -31,9 +34,11 @@ class UsersPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            buildGestureDetector(context, _screenwidth, _screenheight, kPlayerLoginText, kPlayerButtonColor, PlayerLoginPage()),
+            Text("Who Are You?", style: TextStyle(fontSize: 30,color: Colors.white, letterSpacing: 5 ),),
+            SizedBox(height: 30,),
+            buildGestureDetector(context, _screenwidth, _screenheight, player, kPlayerButtonColor, PlayerLoginPage()),
             SizedBox(height: 15.0,),
-            buildGestureDetector(context, _screenwidth, _screenheight, kOwnerLoginText, kOwnerButtonColor, OwnerLoginPage()),
+            buildGestureDetector(context, _screenwidth, _screenheight, owner, kOwnerButtonColor, OwnerLoginPage()),
           ],
         ),
       ),
@@ -46,7 +51,7 @@ class UsersPage extends StatelessWidget {
               MaterialPageRoute(builder: (context) => method),);},
             child: Container(
               width: _screenwidth,
-              height: _screenheight * .2,
+              height: _screenheight * .15,
               child: Center(child: Text(text, style: kLargeButtonTextStyle,)),
               decoration: BoxDecoration(
                   color: color,

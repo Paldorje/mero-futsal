@@ -1,4 +1,4 @@
-#Sat Mar 05 14:46:11 NPT 2022
+#Thu Mar 31 11:24:51 NPT 2022
 base.0=C\:\\Users\\Dell\\StudioProjects\\mero_futsal\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

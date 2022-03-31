@@ -45,7 +45,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _isObscure = true;
   bool _isVisible = false;
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // Textfields for username and password fields
+            // Textfields for email and password fields
             Container(
               height: 140,
               width: 530,
@@ -120,10 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         _isVisible = false;
                       });
                     },
-                    controller: usernameController, // Controller for Username
+                    controller: emailController, // Controller for Email
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Username",
+                        hintText: "Email",
                         contentPadding: EdgeInsets.all(20)),
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                   ),
@@ -172,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   onPressed: () {
                     if (auth.fetchCredentials(
-                        usernameController.text, passwordController.text)) {
+                        emailController.text, passwordController.text)) {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => MyHomePage()),

@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage>
             padding: const EdgeInsets.all(12.0),
             child: Text(
               'Mero Futsal',
-              style: style.copyWith(color: Colors.white, fontSize: 16),
+              style: style.copyWith(color: Colors.white, fontSize: 18, letterSpacing: 1.5),
             ),
           ),
           actions: [

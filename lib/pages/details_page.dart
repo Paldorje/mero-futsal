@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mero_futsal/components/booking_calendar.dart';
 import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:mero_futsal/pages/map.dart';
 
 class DetailsPage extends StatefulWidget {
   final FutsalArenas item;
@@ -36,7 +39,16 @@ class _DetailsPageState extends State<DetailsPage> {
             children: [
               _buildupperpart(
                   screenwidth: _screenwidth, screenheight: _screenheight),
-              _buildbottompart(_screenheight)
+              TextButton
+                (
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
+                  onPressed:() => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MapScreen()),) ,
+                                    child: Text('Location')),
+              _buildbottompart(_screenheight),
+
             ],
           )),
     );
@@ -59,13 +71,13 @@ class _DetailsPageState extends State<DetailsPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  'Time',
-                  style: style.copyWith(
-                      fontWeight: FontWeight.w100,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
+                // Text(
+                //   'Choose a date and time',
+                //   style: style.copyWith(
+                //       fontWeight: FontWeight.w100,
+                //       fontSize: 18,
+                //       color: Colors.black),
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -109,7 +121,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   img: widget.item.img,
                   color: widget.item.color,
                   items: 1,
-                  size: times[value],
+                  size: 6,
                 ),
               );
               total = total + widget.item.price;
@@ -203,43 +215,40 @@ class _DetailsPageState extends State<DetailsPage> {
 
   Widget _timing() {
     return SizedBox(
-        height: 40,
-        width: 500,
-        child: ListView(
-          physics: const NeverScrollableScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          children: [
-            _timingitem(index: 0, title: times[0]),
-            _timingitem(index: 1, title: times[1]),
-            _timingitem(index: 2, title: times[2]),
-            _timingitem(index: 3, title: times[3]),
-            _timingitem(index: 4, title: times[4]),
-          ],
-        ));
-  }
-
-  Widget _timingitem({required int index, required int title}) {
-    return AspectRatio(
-      aspectRatio: 1 / 1,
+        height: 60,
+        width: 400,
       child: GestureDetector(
         onTap: () {
           setState(() {
-            value = index;
           });
         },
         child: Container(
+          height: 40,
+          width: 500,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: value == index ? widget.item.color : Colors.transparent,
+              borderRadius: BorderRadius.circular(8),
+              color: widget.item.color
           ),
-          child: Center(
-              child: Text(
-                title.toString(),
-                style: style.copyWith(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                  color: value == index ? Colors.white : Colors.black,
-                ),
+          child: MaterialButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                builder: (context) => BookingCalendarPage()),) ,
+
+
+                // DatePicker.showDateTimePicker(context,
+                //     showTitleActions: true,
+                //     minTime: DateTime.now(),
+                //     maxTime: DateTime(2022, 3, 30), onChanged: (date) {
+                //       print('change $date');
+                //     }, onConfirm: (date) {
+                //       print('confirm $date');
+                //     }, currentTime: DateTime.now(), locale: LocaleType.en);
+              // },
+              child:
+              Text(
+                'Pick Date',
+                style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.bold),
               )),
         ),
       ),
