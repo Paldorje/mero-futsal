@@ -2,9 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/models/api.services.dart';
 import 'package:mero_futsal/models/user.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerLogin_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/playerlogin_page.dart';
 
 class PlayerSignupPage extends StatefulWidget {
+  const PlayerSignupPage({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SignupPage();
 }
@@ -15,13 +17,13 @@ class _SignupPage extends State<PlayerSignupPage> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
-      body: SignupPageContent(),
+      body: const SignupPageContent(),
       bottomNavigationBar: BottomAppBar(
           color: Colors.transparent,
           elevation: 0,
           child: Container(
-            padding: EdgeInsets.all(20),
-            child: Text(
+            padding: const EdgeInsets.all(20),
+            child: const Text(
               "Mero Futsal",
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
@@ -32,6 +34,8 @@ class _SignupPage extends State<PlayerSignupPage> {
 }
 
 class SignupPageContent extends StatefulWidget {
+  const SignupPageContent({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _SignupPageContent();
 }
@@ -66,12 +70,12 @@ class _SignupPageContent extends State<SignupPageContent> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       reverse: true,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           // Sized Box
-          SizedBox(
+          const SizedBox(
             height: 37.5,
             width: 400,
           ),
@@ -82,7 +86,7 @@ class _SignupPageContent extends State<SignupPageContent> {
               height: 225,
               width: 400,
               alignment: Alignment.center,
-              child: Text(
+              child: const Text(
                 "Signup",
                 style: TextStyle(
                   color: Colors.white,
@@ -101,10 +105,10 @@ class _SignupPageContent extends State<SignupPageContent> {
             maintainState: true,
             child: Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Text(
                 returnVisibilityString,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 10,
                 ),
@@ -116,7 +120,7 @@ class _SignupPageContent extends State<SignupPageContent> {
           Container(
             height: 265,
             width: 530,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 color: Colors.white),
             child: Column(
@@ -128,13 +132,13 @@ class _SignupPageContent extends State<SignupPageContent> {
                     });
                   },
                   controller: nameController, // Controller for Email
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: "Full Name",
                       contentPadding: EdgeInsets.all(17)),
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 ),
-                Divider(
+                const Divider(
                   thickness: 3,
                 ),
                 TextFormField(
@@ -144,13 +148,13 @@ class _SignupPageContent extends State<SignupPageContent> {
                     });
                   },
                   controller: emailController, // Controller for Email
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: "Email",
                       contentPadding: EdgeInsets.all(17)),
                   onEditingComplete: () => FocusScope.of(context).nextFocus(),
                 ),
-                Divider(
+                const Divider(
                   thickness: 3,
                 ),
                 TextFormField(
@@ -164,7 +168,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Password",
-                      contentPadding: EdgeInsets.all(17),
+                      contentPadding: const EdgeInsets.all(17),
                       // Adding the visibility icon to toggle visibility of the password field
                       suffixIcon: IconButton(
                         icon: Icon(_isObscure1
@@ -178,7 +182,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                       )),
                   obscureText: _isObscure1,
                 ),
-                Divider(
+                const Divider(
                   thickness: 3,
                 ),
                 TextFormField(
@@ -192,7 +196,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                   decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Re-enter Password",
-                      contentPadding: EdgeInsets.all(17),
+                      contentPadding: const EdgeInsets.all(17),
                       // Adding the visibility icon to toggle visibility of the password field
                       suffixIcon: IconButton(
                         icon: Icon(_isObscure2
@@ -214,9 +218,9 @@ class _SignupPageContent extends State<SignupPageContent> {
           Container(
             width: 570,
             height: 70,
-            padding: EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 20),
             child: ElevatedButton(
-                child: Text("Submit", style: TextStyle(color: Colors.white)),
+                child: const Text("Submit", style: TextStyle(color: Colors.white)),
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.pink)),
                 onPressed: () async {
@@ -233,22 +237,24 @@ class _SignupPageContent extends State<SignupPageContent> {
                       auth.insertCredentials(
                           emailController.text, passwordController1.text);
 
-                      User user = new User(
-                          name: emailController.text,
+                      User user = User(
+                          name: nameController.text,
                           password: passwordController1.text,
-                          address: 'we',
-                          phone: '1283912',
-                          email: 'we@gmail.com',
+                          address: '',
+                          phone: '',
+                          email: emailController.text,
                           photo: 'www',
                           isDeleted: false,
                           isAvailable: true);
 
                       await APIServices.postUser(user);
-                      print("I got in here");
+                      if (kDebugMode) {
+                        print("I got in here");
+                      }
 
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                            builder: (context) => PlayerLoginPage()),
+                            builder: (context) => const PlayerLoginPage()),
                         (Route<dynamic> route) => false,
                       );
                     } else {

@@ -4,6 +4,8 @@ import 'package:mero_futsal/components/introduction_pages.dart';
 import 'package:mero_futsal/pages/users_page.dart';
 
 class AnimatedIntroductionSlider extends StatelessWidget {
+  const AnimatedIntroductionSlider({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,7 +21,7 @@ class AnimatedIntroductionSlider extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UsersPage(),
+                builder: (context) => const UsersPage(),
               ),
             );
           },
@@ -34,7 +36,7 @@ class AnimatedIntroductionSlider extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UsersPage(),
+                builder: (context) => const UsersPage(),
               ),
             );
           },

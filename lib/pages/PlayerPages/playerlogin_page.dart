@@ -1,16 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/OwnerPages/ownerHome_page.dart';
-import 'package:mero_futsal/pages/OwnerPages/ownerSignup_page.dart';
-
+import 'package:mero_futsal/pages/PlayerPages/playerhome_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/playersignup_page.dart';
 import '../../components/authentication.dart';
 
 final auth = Authentication();
 
-class OwnerLoginPage extends StatelessWidget {
-  // This widget is the root of your application.
+class PlayerLoginPage extends StatelessWidget {
+  const PlayerLoginPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,26 +22,33 @@ class OwnerLoginPage extends StatelessWidget {
       home: Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
-        body: LoginScreen(),
+        body: const LoginScreen(),
         bottomNavigationBar: BottomAppBar(
             color: Colors.transparent,
             elevation: 0,
             child: Container(
-              padding: EdgeInsets.all(20),
-              child: Text(
+              padding: const EdgeInsets.all(20),
+              child: const Text(
                 "Mero Futsal ",
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
-            )),
+            ),
+        ),
       ),
     );
   }
 }
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
+
+  static getEmail() {}
+
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -53,11 +61,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         reverse: true,
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 60,
               width: 200,
             ),
@@ -68,8 +76,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 200,
                 width: 400,
                 alignment: Alignment.center,
-                child: Text(
-                  kOwnerLoginText,
+                child: const Text(
+                  kPlayerLoginText,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 34,
@@ -80,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 60,
               width: 10,
             ),
@@ -93,8 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
               maintainState: true,
               child: Container(
                 alignment: Alignment.centerLeft,
-                padding: EdgeInsets.all(10),
-                child: Text(
+                padding: const EdgeInsets.all(10),
+                child: const Text(
                   "Wrong credentials entered",
                   style: TextStyle(
                     color: Colors.red,
@@ -104,11 +112,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // Textfields for Email and password fields
+            // Text fields for email and password fields
             Container(
               height: 140,
               width: 530,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                   color: Colors.white),
               child: Column(
@@ -119,14 +127,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         _isVisible = false;
                       });
                     },
-                    controller: emailController, // Controller for Username
-                    decoration: InputDecoration(
+                    controller: emailController, // Controller for Email
+                    decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Email",
                         contentPadding: EdgeInsets.all(20)),
                     onEditingComplete: () => FocusScope.of(context).nextFocus(),
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 3,
                   ),
                   TextFormField(
@@ -140,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Password",
-                        contentPadding: EdgeInsets.all(20),
+                        contentPadding: const EdgeInsets.all(20),
                         // Adding the visibility icon to toggle visibility of the password field
                         suffixIcon: IconButton(
                           icon: Icon(_isObscure
@@ -162,42 +170,46 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               width: 570,
               height: 70,
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: ElevatedButton(
-                  child: Text("Submit", style: TextStyle(color: Colors.white)),
+                  child: const Text("Submit", style: TextStyle(color: Colors.white)),
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(kOwnerButtonColor),
+                        MaterialStateProperty.all(kPlayerButtonColor),
                   ),
                   onPressed: () {
-                    Login(emailController.text.toString(),
-                        passwordController.text.toString());
+                    // Navigator.pushAndRemoveUntil(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => MyHomePage()),
+                    //   (Route<dynamic> route) => false,
+                    // );
+                    login(emailController.text.toString(),passwordController.text.toString());
                   }),
             ),
 
             // Register
             Container(
-                padding: EdgeInsets.only(top: 40, left: 20, right: 20),
+                padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
                 child: Center(
                     child: RichText(
                   text: TextSpan(
                     text: "Don't have an account? ",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                     ),
                     children: [
                       TextSpan(
                           text: " Register here",
-                          style: TextStyle(
-                              color: Colors.pink, fontWeight: FontWeight.bold),
-                          recognizer: new TapGestureRecognizer()
+                          style: const TextStyle(
+                              color: Colors.blue, fontWeight: FontWeight.bold),
+                          recognizer: TapGestureRecognizer()
                             ..onTap = () => {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            OwnerSignupPage()),
+                                            const PlayerSignupPage()),
                                   )
                                 }),
                     ],
@@ -207,32 +219,39 @@ class _LoginScreenState extends State<LoginScreen> {
         ));
   }
 
-  void Login(String email, String password) async {
+  void login(String email, String password) async {
     try {
       Response response = await post(
           (Uri.parse(
-              'https://10.0.2.2:7267/Api/Owners/login $email, $password')),
+              'https://10.0.2.2:7267/Api/Users/login $email, $password')),
           body: {'email': email, 'password': password});
-      print(response.statusCode);
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
       if (response.statusCode == 200) {
         // if (auth.fetchCredentials(
         //     email, password)) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => OwnerHomePage()),
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
           (Route<dynamic> route) => false,
         );
-        // } else {
-        //   setState(() {
-        //     _isVisible = true;
-        //   });
-        // }
-        print('Logged In');
-      } else {
-        print('Failed');
+        } else {
+          setState(() {
+            _isVisible = true;
+          });
+        }
+        if (kDebugMode) {
+          print('Logged In');
+        } else {
+        if (kDebugMode) {
+          print('Failed');
+        }
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 }

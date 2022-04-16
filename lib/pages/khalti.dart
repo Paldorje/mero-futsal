@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'khalti_payment_page.dart';
-import 'package:khalti_flutter/localization/khalti_localizations.dart';
 
 class KhaltiPayment extends StatelessWidget {
   const KhaltiPayment({Key? key}) : super(key: key);
@@ -26,7 +25,7 @@ class KhaltiPayment extends StatelessWidget {
                   color: Color.fromRGBO(40, 38, 56, 1),
                 )),
             title: 'Khalti Payment',
-            home: KhaltiPaymentPage(),
+            home: const KhaltiPaymentPage(),
           );
         });
   }

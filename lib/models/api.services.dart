@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 import 'futsal_arenas.dart';
@@ -12,7 +13,9 @@ class APIServices {
 
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
-      print(body);
+      if (kDebugMode) {
+        print(body);
+      }
       List<FutsalArenas> allArenas =
           body.map((dynamic item) => FutsalArenas.fromJson(item)).toList();
       // print(allArenas);
@@ -76,14 +79,24 @@ class APIServices {
     };
     var testBody1 = json.encode(testBody);
     var myUser = user.toJson();
-    var userBody = json.encode(myUser);
+    // var userBody = json.encode(myUser);
     var res = await post(Uri.parse(url), headers: header, body: testBody1);
-    print(res.statusCode);
-    print(res.reasonPhrase);
-    print(res.body);
-    print(res.toString());
+    if (kDebugMode) {
+      print(res.statusCode);
+    }
+    if (kDebugMode) {
+      print(res.reasonPhrase);
+    }
+    if (kDebugMode) {
+      print(res.body);
+    }
+    if (kDebugMode) {
+      print(res.toString());
+    }
 
-    print(testBody);
+    if (kDebugMode) {
+      print(testBody);
+    }
     return res.statusCode;
   }
 }

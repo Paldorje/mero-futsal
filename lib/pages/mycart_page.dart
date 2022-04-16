@@ -163,14 +163,15 @@ class _MyCartState extends State<MyCart> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                padding: const EdgeInsets.all(3),
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: bookedGround[index].color),
+                    color: Colors.white),
                 child: Image.asset(
-                  'assets/img1.png',
+                  'assets/images/two.png',
                   fit: BoxFit.cover,
                   width: 80,
+                  height: 65,
                 )),
             const SizedBox(
               width: 10,
@@ -189,7 +190,7 @@ class _MyCartState extends State<MyCart> {
                     style: style.copyWith(fontSize: 16, color: Colors.black),
                   ),
                   Text(
-                    '\$${bookedGround[index].price}',
+                    'Rs ${bookedGround[index].price}',
                     maxLines: 1,
                     style: style.copyWith(
                         fontSize: 14,

@@ -1,8 +1,16 @@
 import 'package:booking_calendar/booking_calendar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
+import '../models/cart_model.dart';
+import '../models/futsal_arenas.dart';
+
 class BookingCalendarPage extends StatefulWidget {
-  const BookingCalendarPage({Key? key}) : super(key: key);
+  // final FutsalArenas item;
+  const BookingCalendarPage({Key? key,
+    // required this.item
+  }) : super(key: key);
 
   @override
   State<BookingCalendarPage> createState() => _BookingCalendarPageState();
@@ -34,25 +42,40 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
     await Future.delayed(const Duration(seconds: 1));
     converted.add(DateTimeRange(
         start: newBooking.bookingStart, end: newBooking.bookingEnd));
-    print('${newBooking.toJson()} has been uploaded');
+    const Center(child: CircularProgressIndicator());
+    // bookedGround.add(
+    //       CartModel(
+    //         name: widget.item.futsalName,
+    //         price: widget.item.cost,
+    //         // img: widget.item.img,
+    //         color: Colors.red,
+    //         items: 1,
+    //         size: 6,
+    //       ),
+    //     );
+    //     total = total + widget.item.cost;
+    //     Navigator.pop(context);
+    if (kDebugMode) {
+      print('${newBooking.toJson()} has been uploaded');
+    }
   }
 
   List<DateTimeRange> converted = [];
 
   List<DateTimeRange> convertStreamResultMock({required dynamic streamResult}) {
-    ///here you can parse the streamresult and convert to [List<DateTimeRange>]
+    ///here you can parse the streamResult and convert to [List<DateTimeRange>]
     DateTime first = now;
-    DateTime second = now.add(Duration(minutes: 55));
-    DateTime third = now.subtract(Duration(minutes: 240));
-    DateTime fourth = now.subtract(Duration(minutes: 500));
+    DateTime second = now.add(const Duration(minutes: 55));
+    DateTime third = now.subtract(const Duration(minutes: 240));
+    DateTime fourth = now.subtract(const Duration(minutes: 500));
     converted
-        .add(DateTimeRange(start: first, end: now.add(Duration(minutes: 30))));
+        .add(DateTimeRange(start: first, end: now.add(const Duration(minutes: 30))));
     converted.add(
-        DateTimeRange(start: second, end: second.add(Duration(minutes: 23))));
+        DateTimeRange(start: second, end: second.add(const Duration(minutes: 23))));
     converted.add(
-        DateTimeRange(start: third, end: third.add(Duration(minutes: 15))));
+        DateTimeRange(start: third, end: third.add(const Duration(minutes: 15))));
     converted.add(
-        DateTimeRange(start: fourth, end: fourth.add(Duration(minutes: 50))));
+        DateTimeRange(start: fourth, end: fourth.add(const Duration(minutes: 50))));
     return converted;
   }
 
@@ -60,7 +83,7 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF282638),
+        backgroundColor: const Color(0xFF282638),
         leading: Padding(
           padding: const EdgeInsets.all(10.0),
           child: InkWell(
@@ -81,9 +104,9 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
           convertStreamResultToDateTimeRanges: convertStreamResultMock,
           getBookingStream: getBookingStreamMock,
           uploadBooking: uploadBookingMock,
-          bookingButtonText: 'PICK',
+          bookingButtonText: 'Book',
           bookingButtonColor: Colors.pink,
-          // loadingWidget: ,
+          // loadingWidget: const Center(child: CircularProgressIndicator()),
         ),
       ),
     );

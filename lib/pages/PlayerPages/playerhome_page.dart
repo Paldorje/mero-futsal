@@ -6,7 +6,7 @@ import 'package:mero_futsal/models/futsal_arenas.dart';
 import 'package:mero_futsal/pages/PlayerPages/team_page.dart';
 import 'package:mero_futsal/pages/details_page.dart';
 import 'package:mero_futsal/pages/favorite_page.dart';
-import 'package:mero_futsal/pages/myCart_page.dart';
+import 'package:mero_futsal/pages/mycart_page.dart';
 import 'package:mero_futsal/pages/profile_page.dart';
 
 import '../../models/api.services.dart';
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage>
             GestureDetector(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => MyCart()));
+                    context, MaterialPageRoute(builder: (context) => const MyCart()));
               },
               child: Padding(
                 padding: const EdgeInsets.only(top: 20, right: 10),
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage>
                               List<FutsalArenas> allArenas = snapshot.data;
                               return _buildListItem(items: allArenas);}
                               return const Center(child: CircularProgressIndicator());}),
-                            ProfilePage(),
+                            const ProfilePage(),
                             const Team(),
                           ]),
                         ),

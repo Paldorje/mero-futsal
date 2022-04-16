@@ -4,11 +4,13 @@ import 'package:khalti_flutter/localization/khalti_localizations.dart';
 import 'pages/welcome_page.dart';
 
 void main() {
-  runApp(MeroFutsal());
+  runApp(const MeroFutsal());
   HttpOverrides.global = MyHttpOverrides();
 }
 
 class MeroFutsal extends StatelessWidget {
+  const MeroFutsal({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +22,7 @@ class MeroFutsal extends StatelessWidget {
         localizationsDelegates: const [
           KhaltiLocalizations.delegate,
         ],
-      home: AnimatedIntroductionSlider(),
+      home: const AnimatedIntroductionSlider(),
     );
   }
 }

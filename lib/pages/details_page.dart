@@ -22,8 +22,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenheight = MediaQuery.of(context).size.height;
-    var _screenwidth = MediaQuery.of(context).size.width;
+    var _screenHeight = MediaQuery.of(context).size.height;
+    var _screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
@@ -37,23 +37,35 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
           child: Column(
             children: [
-              _buildupperpart(
-                  screenwidth: _screenwidth, screenheight: _screenheight),
-              TextButton(
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.white)),
-                  onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MapScreen()),
-                      ),
-                  child: Text('Location')),
-              _buildbottompart(_screenheight),
+              _buildUpperPart(
+                  screenWidth: _screenWidth, screenHeight: _screenHeight),
+              _buildBottomPart(_screenHeight),
             ],
           )),
     );
   }
 
-  Expanded _buildbottompart(double _screenheight) {
+  Container buildTextButton(BuildContext context) {
+    return Container(
+      height: 40,
+      width: 500,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8), color: Colors.red),
+      child: MaterialButton(
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MapScreen()),
+        ),
+        child: const Text(
+          'Find location on Map',
+          style: TextStyle(
+              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Expanded _buildBottomPart(double _screenHeight) {
     return Expanded(
         child: Container(
       color: white,
@@ -68,38 +80,43 @@ class _DetailsPageState extends State<DetailsPage> {
               style: style.copyWith(color: Colors.black),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
-            // Text(
-            //   'Choose a date and time',
-            //   style: style.copyWith(
-            //       fontWeight: FontWeight.w100,
-            //       fontSize: 18,
-            //       color: Colors.black),
-            // ),
+            Text(
+              'Price: Rs ${widget.item.cost}',
+              style: style.copyWith(fontSize: 17, color: Colors.black),
+            ),
             const SizedBox(
               height: 20,
             ),
-            _timing(),
+
+            Text(
+              'Location: ${widget.item.location}',
+              style: style.copyWith(fontSize: 17, color: Colors.black),
+            ),
             const SizedBox(
               height: 30,
             ),
-            _buildbutton(_screenheight)
+            buildTextButton(context),
+            const SizedBox(
+              height: 10,
+            ),
+            _buildButton(_screenHeight)
           ],
         ),
       ),
     ));
   }
 
-  Flexible _buildbutton(double _screenheight) {
+  Flexible _buildButton(double _screenHeight) {
     return Flexible(
       fit: FlexFit.loose,
       child: Container(
-        height: _screenheight * .08,
+        height: _screenHeight * .08,
         width: double.maxFinite,
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(10), /**color: widget.item.color**/
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.red,
         ),
         child: MaterialButton(
           onPressed: () {
@@ -115,18 +132,21 @@ class _DetailsPageState extends State<DetailsPage> {
                   ));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else {
-              bookedGround.add(
-                CartModel(
-                  name: widget.item.futsalName,
-                  price: widget.item.cost,
-                  // img: widget.item.img,
-                  color: Colors.red,
-                  items: 1,
-                  size: 6,
-                ),
-              );
-              total = total + widget.item.cost;
-              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BookingCalendarPage()));
+              // bookedGround.add(
+              //   CartModel(
+              //     name: widget.item.futsalName,
+              //     price: widget.item.cost,
+              //     // img: widget.item.img,
+              //     color: Colors.red,
+              //     items: 1,
+              //     size: 6,
+              //   ),
+              // );
+              // total = total + widget.item.cost;
+              // Navigator.pop(context);
             }
           },
           child: Row(
@@ -150,14 +170,14 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget _buildupperpart(
-      {required var screenwidth, required var screenheight}) {
+  Widget _buildUpperPart(
+      {required var screenWidth, required var screenHeight}) {
     return Container(
-      width: screenwidth,
-      height: screenheight * .6,
-      decoration: BoxDecoration(
+      width: screenWidth,
+      height: screenHeight * .6,
+      decoration: const BoxDecoration(
           color: Colors.red,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(30),
           )),
@@ -214,44 +234,34 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget _timing() {
-    return SizedBox(
-      height: 60,
-      width: 400,
-      child: GestureDetector(
-        onTap: () {
-          setState(() {});
-        },
-        child: Container(
-          height: 40,
-          width: 500,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8), color: Colors.red),
-          child: MaterialButton(
-              onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BookingCalendarPage()),
-                  ),
-
-              // DatePicker.showDateTimePicker(context,
-              //     showTitleActions: true,
-              //     minTime: DateTime.now(),
-              //     maxTime: DateTime(2022, 3, 30), onChanged: (date) {
-              //       print('change $date');
-              //     }, onConfirm: (date) {
-              //       print('confirm $date');
-              //     }, currentTime: DateTime.now(), locale: LocaleType.en);
-              // },
-              child: Text(
-                'Pick Date',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              )),
-        ),
-      ),
-    );
-  }
+  // Widget _timing() {
+  //   return SizedBox(
+  //     height: 60,
+  //     width: 400,
+  //     child: GestureDetector(
+  //       onTap: () {
+  //         setState(() {});
+  //       },
+  //       child: Container(
+  //         height: 40,
+  //         width: 500,
+  //         decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(8), color: Colors.red),
+  //         child: MaterialButton(
+  //             onPressed: () => Navigator.push(
+  //                   context,
+  //                   MaterialPageRoute(
+  //                       builder: (context) => const BookingCalendarPage()),
+  //                 ),
+  //             child: const Text(
+  //               'Pick Date',
+  //               style: TextStyle(
+  //                   color: Colors.white,
+  //                   fontSize: 16,
+  //                   fontWeight: FontWeight.bold),
+  //             )),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

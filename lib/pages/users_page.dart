@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/OwnerPages/ownerLogin_page.dart';
+import 'package:mero_futsal/pages/OwnerPages/ownerlogin_page.dart';
 
-import 'PlayerPages/playerLogin_page.dart';
+import 'PlayerPages/playerlogin_page.dart';
 
 class UsersPage extends StatelessWidget {
+  const UsersPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     var _screenheight = MediaQuery.of(context).size.height;
@@ -14,7 +16,7 @@ class UsersPage extends StatelessWidget {
     String owner = "Owner";
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(40, 38, 56, 1),
+      backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -30,25 +32,25 @@ class UsersPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               "Who Are You?",
               style: TextStyle(
                   fontSize: 30, color: Colors.white, letterSpacing: 5),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             buildGestureDetector(context, _screenwidth, _screenheight, player,
-                kPlayerButtonColor, PlayerLoginPage()),
-            SizedBox(
+                kPlayerButtonColor, const PlayerLoginPage()),
+            const SizedBox(
               height: 15.0,
             ),
             buildGestureDetector(context, _screenwidth, _screenheight, owner,
-                kOwnerButtonColor, OwnerLoginPage()),
+                kOwnerButtonColor, const OwnerLoginPage()),
           ],
         ),
       ),

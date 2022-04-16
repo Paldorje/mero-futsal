@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
-import 'package:mero_futsal/pages/myCart_page.dart';
+import 'package:mero_futsal/pages/mycart_page.dart';
 import 'package:mero_futsal/pages/profile_page.dart';
 
 import '../../models/api.services.dart';
 
 class OwnerHomePage extends StatefulWidget {
+  const OwnerHomePage({Key? key}) : super(key: key);
+
   @override
   _OwnerHomePageState createState() => _OwnerHomePageState();
 }
@@ -35,7 +37,7 @@ class _OwnerHomePageState extends State<OwnerHomePage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(40, 38, 56, 1),
+        backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -61,7 +63,7 @@ class _OwnerHomePageState extends State<OwnerHomePage>
                   indicator: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: kPlayerButtonColor),
-                  unselectedLabelColor: Color(0xFF959191),
+                  unselectedLabelColor: const Color(0xFF959191),
                   tabs: const [
                     Tab(
                       icon: Icon(Icons.home),
@@ -82,8 +84,8 @@ class _OwnerHomePageState extends State<OwnerHomePage>
               Expanded(
                 child: TabBarView(controller: _controller, children: [
                   _buildlistitem(items: allArenas),
-                  ProfilePage(),
-                  MyCart(),
+                  const ProfilePage(),
+                  const MyCart(),
                 ]),
               ),
               const SizedBox(

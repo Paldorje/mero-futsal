@@ -3,15 +3,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerHome_page.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerSignup_page.dart';
+import 'package:mero_futsal/pages/OwnerPages/ownerhome_page.dart';
+import 'package:mero_futsal/pages/OwnerPages/ownersignup_page.dart';
+
 import '../../components/authentication.dart';
 
 final auth = Authentication();
 
-class PlayerLoginPage extends StatelessWidget {
-  const PlayerLoginPage({Key? key}) : super(key: key);
+class OwnerLoginPage extends StatelessWidget {
+  const OwnerLoginPage({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,8 +35,7 @@ class PlayerLoginPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
-            ),
-        ),
+            )),
       ),
     );
   }
@@ -43,12 +44,8 @@ class PlayerLoginPage extends StatelessWidget {
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
-  static getEmail() {}
-
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -77,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 400,
                 alignment: Alignment.center,
                 child: const Text(
-                  kPlayerLoginText,
+                  kOwnerLoginText,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 34,
@@ -112,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
 
-            // Text fields for email and password fields
+            // Textfields for Email and password fields
             Container(
               height: 140,
               width: 530,
@@ -127,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _isVisible = false;
                       });
                     },
-                    controller: emailController, // Controller for Email
+                    controller: emailController, // Controller for Username
                     decoration: const InputDecoration(
                         border: InputBorder.none,
                         hintText: "Email",
@@ -175,15 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text("Submit", style: TextStyle(color: Colors.white)),
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(kPlayerButtonColor),
+                        MaterialStateProperty.all(kOwnerButtonColor),
                   ),
                   onPressed: () {
-                    // Navigator.pushAndRemoveUntil(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => MyHomePage()),
-                    //   (Route<dynamic> route) => false,
-                    // );
-                    login(emailController.text.toString(),passwordController.text.toString());
+                    login(emailController.text.toString(),
+                        passwordController.text.toString());
                   }),
             ),
 
@@ -202,14 +195,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextSpan(
                           text: " Register here",
                           style: const TextStyle(
-                              color: Colors.blue, fontWeight: FontWeight.bold),
+                              color: Colors.pink, fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () => {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            PlayerSignupPage()),
+                                            const OwnerSignupPage()),
                                   )
                                 }),
                     ],
@@ -223,7 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
     try {
       Response response = await post(
           (Uri.parse(
-              'https://10.0.2.2:7267/Api/Users/login $email, $password')),
+              'https://10.0.2.2:7267/Api/Owners/login $email, $password')),
           body: {'email': email, 'password': password});
       if (kDebugMode) {
         print(response.statusCode);
@@ -233,17 +226,18 @@ class _LoginScreenState extends State<LoginScreen> {
         //     email, password)) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()),
+          MaterialPageRoute(builder: (context) => const OwnerHomePage()),
           (Route<dynamic> route) => false,
         );
-        } else {
-          setState(() {
-            _isVisible = true;
-          });
-        }
+        // } else {
+        //   setState(() {
+        //     _isVisible = true;
+        //   });
+        // }
         if (kDebugMode) {
           print('Logged In');
-        } else {
+        }
+      } else {
         if (kDebugMode) {
           print('Failed');
         }

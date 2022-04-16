@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 var _username = ["admin"];
 var _password = ["admin"];
 int _i = 1;
@@ -15,7 +17,9 @@ class Authentication {
   bool checkUserRepeat(username) {
     for (var j = 0; j < _username.length; j++) {
       if (username == _username[j]) {
-        print(username);
+        if (kDebugMode) {
+          print(username);
+        }
         return true;
       }
     }
@@ -29,15 +33,15 @@ class Authentication {
   }
 
   bool isPasswordCompliant(String password, [int minLength = 6]) {
-    if (password == null || password.isEmpty) {
+    if (password.isEmpty) {
       return false;
     }
 
-    bool hasUppercase = password.contains(new RegExp(r'[A-Z]'));
-    bool hasDigits = password.contains(new RegExp(r'[0-9]'));
-    bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
+    bool hasUppercase = password.contains(RegExp(r'[A-Z]'));
+    bool hasDigits = password.contains(RegExp(r'[0-9]'));
+    bool hasLowercase = password.contains(RegExp(r'[a-z]'));
     bool hasSpecialCharacters =
-        password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+        password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
     bool hasMinLength = password.length > minLength;
 
     return hasDigits &

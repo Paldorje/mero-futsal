@@ -16,15 +16,15 @@ const kLargeButtonTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const kFirstIntrTitleText = 'Welcome';
-const kSecondIntrTitleText = 'Manage Arenas';
-const kThirdIntrTitleTextt = 'Book Grounds';
+const kFirstIntroTitleText = 'Welcome';
+const kSecondIntroTitleText = 'Manage Arenas';
+const kThirdIntroTitleText = 'Book Grounds';
 
-const kFirstIntrContentText = 'Welcome to Mero Futsal';
+const kFirstIntroContentText = 'Welcome to Mero Futsal';
 
-const kSecondIntrContentText = 'You can manage your futsal grounds here ! ';
+const kSecondIntroContentText = 'You can manage your futsal grounds here ! ';
 
-const kThirdIntrContentText =
+const kThirdIntroContentText =
     'Book you favourite futsal grounds and start playing! ';
 
 final TextStyle style = GoogleFonts.lato(
@@ -32,74 +32,6 @@ final TextStyle style = GoogleFonts.lato(
 const Color bleu = Color(0xFF148BFF);
 const Color red = Color(0xFFC3011B);
 const Color white = Color(0xFFDCDBEB);
-
-// List<FutsalArenas> allArenas = [
-//   FutsalArenas(
-//       futsalName: 'Sherpa Futsal',
-//       img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//   )
-//   FutsalArenas(
-//       futsalName: 'Sherpa Futsal',
-//       img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//   FutsalArenas(
-//       futsalName: 'Sherpa Futsal',
-//       img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//   FutsalArenas(
-//   futsalName: 'Sherpa Futsal',
-//   img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//   FutsalArenas(
-//       futsalName: 'Sherpa Futsal',
-//       img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//   FutsalArenas(
-//       futsalName: 'Sherpa Futsal',
-//       img: 'assets/images/one.png',
-//       location: 'Baudha',
-//       cost: 1000,
-//       isAvailable: false,
-//       color: red,
-//       ownerEmail: 'email@email.com',
-//       isDeleted: false,
-//
-//   FutsalArenas(
-// futsalName: 'Sherpa Futsal',
-// img: 'assets/images/one.png',
-// location: 'Baudha',
-// cost: 1000,
-// isAvailable: false,
-// color: red,
-// ownerEmail: 'email@email.com',
-// isDeleted: false,
-// ];
 
 List times = [6, 7, 8, 9, 10];
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/cart_model.dart';
-import 'package:mero_futsal/pages/Khalti.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerHome_page.dart';
+import 'package:mero_futsal/pages/khalti.dart';
+import 'package:mero_futsal/pages/PlayerPages/playerhome_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartModel> cartModel;
@@ -178,7 +178,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => KhaltiPayment()));
+                      builder: (context) => const KhaltiPayment()));
             });
             Future.delayed(const Duration(seconds: 3)).then((value) {
               setState(() {
@@ -211,7 +211,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               bookedGround.clear();
               total = 0.0;
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => MyHomePage()));
+                  context, MaterialPageRoute(builder: (_) => const MyHomePage()));
             },
             btnOkColor: Colors.green,
             buttonsBorderRadius: BorderRadius.circular(20))

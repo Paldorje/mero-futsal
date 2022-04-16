@@ -6,9 +6,9 @@ final pages = [
   PageViewModel(
       pageColor: const Color(0xFF282638),
       //  bubble: CachedNetworkImage(imageUrl: firstImageIcon),
-      body: const Text(kFirstIntrContentText),
+      body: const Text(kFirstIntroContentText),
       title: const Text(
-        kFirstIntrTitleText,
+        kFirstIntroTitleText,
       ),
       textStyle: const TextStyle(fontFamily: 'MyFont', color: Colors.white),
       mainImage: Image.asset(
@@ -21,8 +21,8 @@ final pages = [
     pageColor: const Color(0xFF282638),
     // bubble: CachedNetworkImage(imageUrl: secondImageIcon),
 
-    body: const Text(kSecondIntrContentText),
-    title: const Text(kSecondIntrTitleText),
+    body: const Text(kSecondIntroContentText),
+    title: const Text(kSecondIntroTitleText),
     mainImage: Image.asset(
       'assets/images/two.png',
       height: 420.0,
@@ -34,8 +34,8 @@ final pages = [
   PageViewModel(
     pageColor: const Color(0xFF282638),
     //bubble: CachedNetworkImage(imageUrl: thirdImageIcon),
-    body: const Text(kThirdIntrContentText),
-    title: const Text(kThirdIntrTitleTextt),
+    body: const Text(kThirdIntroContentText),
+    title: const Text(kThirdIntroTitleText),
     mainImage: Image.asset(
       'assets/images/three.png',
       height: 420.0,

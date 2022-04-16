@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/models/api.services.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerLogin_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/playerlogin_page.dart';
 import 'package:mero_futsal/pages/ProfileEditPages/edit_address.dart';
 import 'package:mero_futsal/pages/ProfileEditPages/edit_email.dart';
 import 'package:mero_futsal/pages/ProfileEditPages/edit_image.dart';
@@ -11,6 +11,8 @@ import 'package:mero_futsal/widgets/display_image_widget.dart';
 
 // This class handles the Page to dispaly the user's info on the "Edit Profile" Screen
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -38,20 +40,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 InkWell(
                   onTap: () {
-                    navigateSecondPage(EditImagePage());
+                    navigateSecondPage(const EditImagePage());
                   },
                   child: DisplayImage(
                     imagePath: user.photo,
                     onPressed: () {},
                   ),
                 ),
-                buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
-                buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
-                buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
-                buildUserInfoDisplay(user.address, 'Address', EditAddressFormPage()),
+                buildUserInfoDisplay(user.name, 'Name', const EditNameFormPage()),
+                buildUserInfoDisplay(user.email, 'Email', const EditEmailFormPage()),
+                buildUserInfoDisplay(user.phone, 'Phone', const EditPhoneFormPage()),
+                buildUserInfoDisplay(user.address, 'Address', const EditAddressFormPage()),
                 Center(
                   child: ElevatedButton(
-                      child: Text(
+                      child: const Text(
                           "Logout", style: TextStyle(color: Colors.white)),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.pink),
@@ -60,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) =>
-                              PlayerLoginPage()),
+                              const PlayerLoginPage()),
                               (Route<dynamic> route) => false,
                         );
                       }),
@@ -68,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             );
           }
-          return Center(child: CircularProgressIndicator());}),
+          return const Center(child: CircularProgressIndicator());}),
       );
   }
 
@@ -76,25 +78,25 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildUserInfoDisplay(String getValue, String title, Widget editPage) =>
       Expanded(
         child: Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 1,
                 ),
                 Container(
                     width: 350,
                     height: 40,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         border: Border(
                             bottom: BorderSide(
                       color: Colors.grey,
@@ -108,9 +110,9 @@ class _ProfilePageState extends State<ProfilePage> {
                               },
                               child: Text(
                                 getValue,
-                                style: TextStyle(fontSize: 16, height: 1.4),
+                                style: const TextStyle(fontSize: 16, height: 1.4),
                               ))),
-                      Icon(
+                      const Icon(
                         Icons.keyboard_arrow_right,
                         color: Colors.grey,
                         size: 40.0,

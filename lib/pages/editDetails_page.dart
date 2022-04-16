@@ -145,9 +145,9 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
     return Container(
       width: screenwidth,
       height: screenheight * .6,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           // color: widget.item.color,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(30),
         bottomRight: Radius.circular(30),
       )),
