@@ -1,18 +1,20 @@
-import 'package:flutter/cupertino.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'futsal_arenas.g.dart';
+
+@JsonSerializable()
 class FutsalArenas {
-  final String img;
-  final String name;
-  final String company;
-  final double price;
-  bool isselected;
-  final Color color;
+  String futsalName, location, ownerEmail;
+  bool isReserved, isDeleted;
 
-  FutsalArenas(
-      {required this.img,
-        required this.name,
-        required this.company,
-        required this.price,
-        required this.isselected,
-        required this.color});
+  // String img, color;
+  int cost;
+
+  FutsalArenas(this.futsalName, this.location, this.ownerEmail, this.cost,
+      this.isReserved, this.isDeleted);
+
+  factory FutsalArenas.fromJson(Map<String, dynamic> json) =>
+      _$FutsalArenasFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FutsalArenasToJson(this);
 }

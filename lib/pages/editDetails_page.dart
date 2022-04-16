@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/constants.dart';
+import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
 
 class EditDetailsPage extends StatefulWidget {
@@ -17,6 +17,7 @@ class EditDetailsPage extends StatefulWidget {
 
 class _EditDetailsPageState extends State<EditDetailsPage> {
   int value = 0;
+
   @override
   Widget build(BuildContext context) {
     var _screenheight = MediaQuery.of(context).size.height;
@@ -45,39 +46,39 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
   Expanded _buildbottompart(double _screenheight) {
     return Expanded(
         child: Container(
-          color: white,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  widget.item.name,
-                  style: style.copyWith(color: Colors.black),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Manage Time',
-                  style: style.copyWith(
-                      fontWeight: FontWeight.w100,
-                      fontSize: 20,
-                      color: Colors.black),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _timing(),
-                const SizedBox(
-                  height: 30,
-                ),
-                _buildbutton(_screenheight)
-              ],
+      color: white,
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              widget.item.futsalName,
+              style: style.copyWith(color: Colors.black),
             ),
-          ),
-        ));
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Manage Time',
+              style: style.copyWith(
+                  fontWeight: FontWeight.w100,
+                  fontSize: 20,
+                  color: Colors.black),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _timing(),
+            const SizedBox(
+              height: 30,
+            ),
+            _buildbutton(_screenheight)
+          ],
+        ),
+      ),
+    ));
   }
 
   Flexible _buildbutton(double _screenheight) {
@@ -87,12 +88,14 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
         height: _screenheight * .08,
         width: double.maxFinite,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: widget.item.color),
+          borderRadius:
+              BorderRadius.circular(10), /** color: widget.item.color**/
+        ),
         child: MaterialButton(
           onPressed: () {
             if (bookedGround
                 .map((item) => item.name)
-                .contains(widget.item.name)) {
+                .contains(widget.item.futsalName)) {
               final snackBar = SnackBar(
                   backgroundColor: Colors.teal,
                   duration: const Duration(seconds: 2),
@@ -104,15 +107,15 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
             } else {
               bookedGround.add(
                 CartModel(
-                  name: widget.item.name,
-                  price: widget.item.price,
-                  img: widget.item.img,
-                  color: widget.item.color,
+                  name: widget.item.futsalName,
+                  price: widget.item.cost,
+                  // img: widget.item.img,
+                  color: Colors.red,
                   items: 1,
                   size: times[value],
                 ),
               );
-              total = total + widget.item.price;
+              total = total + widget.item.cost;
               Navigator.pop(context);
             }
           },
@@ -143,11 +146,11 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
       width: screenwidth,
       height: screenheight * .6,
       decoration: BoxDecoration(
-          color: widget.item.color,
+          // color: widget.item.color,
           borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(30),
-            bottomRight: Radius.circular(30),
-          )),
+        bottomLeft: Radius.circular(30),
+        bottomRight: Radius.circular(30),
+      )),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -173,7 +176,8 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
             ),
             Center(
               child: Image.asset(
-                widget.item.img,
+                // widget.item.img,
+                'assets/images/one.png',
                 width: 450,
                 height: 355,
                 fit: BoxFit.cover,
@@ -214,17 +218,17 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: value == index ? widget.item.color : Colors.transparent,
+            // color: value == index ? widget.item.color : Colors.transparent,
           ),
           child: Center(
               child: Text(
-                title.toString(),
-                style: style.copyWith(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900,
-                  color: value == index ? Colors.white : Colors.black,
-                ),
-              )),
+            title.toString(),
+            style: style.copyWith(
+              fontSize: 15,
+              fontWeight: FontWeight.w900,
+              color: value == index ? Colors.white : Colors.black,
+            ),
+          )),
         ),
       ),
     );

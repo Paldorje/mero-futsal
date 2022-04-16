@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 var _username = ["admin"];
 var _password = ["admin"];
 int _i = 1;
@@ -39,13 +37,13 @@ class Authentication {
     bool hasDigits = password.contains(new RegExp(r'[0-9]'));
     bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
     bool hasSpecialCharacters =
-    password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+        password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
     bool hasMinLength = password.length > minLength;
 
     return hasDigits &
-    hasUppercase &
-    hasLowercase &
-    hasSpecialCharacters &
-    hasMinLength;
+        hasUppercase &
+        hasLowercase &
+        hasSpecialCharacters &
+        hasMinLength;
   }
 }

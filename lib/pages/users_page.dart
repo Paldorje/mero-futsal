@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/ownerLogin_page.dart';
-import 'playerLogin_page.dart';
+import 'package:mero_futsal/pages/OwnerPages/ownerLogin_page.dart';
 
+import 'PlayerPages/playerLogin_page.dart';
 
 class UsersPage extends StatelessWidget {
   @override
@@ -34,28 +34,55 @@ class UsersPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Who Are You?", style: TextStyle(fontSize: 30,color: Colors.white, letterSpacing: 5 ),),
-            SizedBox(height: 30,),
-            buildGestureDetector(context, _screenwidth, _screenheight, player, kPlayerButtonColor, PlayerLoginPage()),
-            SizedBox(height: 15.0,),
-            buildGestureDetector(context, _screenwidth, _screenheight, owner, kOwnerButtonColor, OwnerLoginPage()),
+            Text(
+              "Who Are You?",
+              style: TextStyle(
+                  fontSize: 30, color: Colors.white, letterSpacing: 5),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            buildGestureDetector(context, _screenwidth, _screenheight, player,
+                kPlayerButtonColor, PlayerLoginPage()),
+            SizedBox(
+              height: 15.0,
+            ),
+            buildGestureDetector(context, _screenwidth, _screenheight, owner,
+                kOwnerButtonColor, OwnerLoginPage()),
           ],
         ),
       ),
     );
   }
 
-  GestureDetector buildGestureDetector(BuildContext context, double _screenwidth, double _screenheight, var text, Color color, var method) {
+  GestureDetector buildGestureDetector(
+      BuildContext context,
+      double _screenwidth,
+      double _screenheight,
+      var text,
+      Color color,
+      var method) {
     return GestureDetector(
-            onTap: (){Navigator.push(context,
-              MaterialPageRoute(builder: (context) => method),);},
-            child: Container(
-              width: _screenwidth,
-              height: _screenheight * .15,
-              child: Center(child: Text(text, style: kLargeButtonTextStyle,)),
-              decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: const BorderRadius.all(Radius.circular(30),
-                  )),),);
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => method),
+        );
+      },
+      child: Container(
+        width: _screenwidth,
+        height: _screenheight * .15,
+        child: Center(
+            child: Text(
+          text,
+          style: kLargeButtonTextStyle,
+        )),
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(30),
+            )),
+      ),
+    );
   }
 }

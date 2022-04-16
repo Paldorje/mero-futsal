@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:string_validator/string_validator.dart';
 import 'package:mero_futsal/models/api.services.dart';
 import 'package:mero_futsal/widgets/appbar_widget.dart';
+import 'package:string_validator/string_validator.dart';
 
 // This class handles the Page to edit the Name Section of the User Profile.
 class EditNameFormPage extends StatefulWidget {

@@ -44,32 +44,32 @@ class _MyCartState extends State<MyFavorite> {
             padding: const EdgeInsets.all(20.0),
             child: favouriteArenas.isNotEmpty
                 ? Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                    height: _screenheight * .75,
-                    child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: favouriteArenas.length,
-                        itemBuilder: (context, index) {
-                          return index % 2 == 0
-                              ? BounceInRight(
-                              child: _buildfavoriteitem(index: index))
-                              : BounceInLeft(
-                              child:
-                              _buildfavoriteitem(index: index));
-                        })),
-              ],
-            )
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                          height: _screenheight * .75,
+                          child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: favouriteArenas.length,
+                              itemBuilder: (context, index) {
+                                return index % 2 == 0
+                                    ? BounceInRight(
+                                        child: _buildfavoriteitem(index: index))
+                                    : BounceInLeft(
+                                        child:
+                                            _buildfavoriteitem(index: index));
+                              })),
+                    ],
+                  )
                 : Center(
-              child: Text(
-                'Nothing To Show',
-                style: style.copyWith(
-                  color: Colors.black,
-                  fontSize: 24,
-                ),
-              ),
-            )),
+                    child: Text(
+                      'Nothing To Show',
+                      style: style.copyWith(
+                        color: Colors.black,
+                        fontSize: 24,
+                      ),
+                    ),
+                  )),
       ),
     );
   }
@@ -78,9 +78,9 @@ class _MyCartState extends State<MyFavorite> {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (_) => DetailsPage(item: favouriteArenas[index])))
+                context,
+                MaterialPageRoute(
+                    builder: (_) => DetailsPage(item: favouriteArenas[index])))
             .then((value) {
           setState(() {});
         });
@@ -104,10 +104,9 @@ class _MyCartState extends State<MyFavorite> {
             Container(
                 padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: favouriteArenas[index].color),
+                    borderRadius: BorderRadius.circular(20), color: Colors.red),
                 child: Image.asset(
-                  favouriteArenas[index].img,
+                  'assets/img1.png',
                   fit: BoxFit.cover,
                   width: 80,
                 )),
@@ -118,7 +117,7 @@ class _MyCartState extends State<MyFavorite> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  favouriteArenas[index].name,
+                  favouriteArenas[index].futsalName,
                   maxLines: 1,
                   style: style.copyWith(fontSize: 16, color: Colors.black),
                 ),
@@ -126,7 +125,7 @@ class _MyCartState extends State<MyFavorite> {
                   height: 10,
                 ),
                 Text(
-                  '\$${favouriteArenas[index].price}',
+                  '\$${favouriteArenas[index].cost}',
                   maxLines: 1,
                   style: style.copyWith(
                       fontSize: 16,
@@ -139,7 +138,7 @@ class _MyCartState extends State<MyFavorite> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  favouriteArenas[index].isselected = false;
+                  favouriteArenas[index].isReserved = false;
                   favouriteArenas.remove(favouriteArenas[index]);
                 });
               },

@@ -57,6 +57,8 @@ dependencies:
   shared_preferences: ^2.0.8
   json_annotation: ^4.4.0
   flutter_datetime_picker: ^1.5.1
+  url_launcher: ^6.0.20
+  khalti_flutter: ^2.0.2
 
 dev_dependencies:
   json_serializable: ^6.1.5

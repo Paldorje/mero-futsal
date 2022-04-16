@@ -56,11 +56,13 @@ class EditAddressFormPageState extends State<EditAddressFormPage> {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your address.';
+                            } else if (!isAlpha(value)) {
+                              return 'Only Letters Please';
                             }
                             return null;
                           },
-                          decoration: const InputDecoration(
-                              labelText: 'Your address'),
+                          decoration:
+                              const InputDecoration(labelText: 'Your address'),
                           controller: addressController,
                         ))),
                 Padding(
@@ -74,8 +76,7 @@ class EditAddressFormPageState extends State<EditAddressFormPage> {
                             onPressed: () {
                               // Validate returns true if the form is valid, or false otherwise.
                               if (_formKey.currentState!.validate() &&
-                                  isAlpha(
-                                      addressController.text)) {
+                                  isAlpha(addressController.text)) {
                                 updateUserValue(addressController.text);
                                 Navigator.pop(context);
                               }

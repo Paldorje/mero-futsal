@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:mero_futsal/models/api.services.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
-import 'package:mero_futsal/widgets/appbar_widget.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mero_futsal/models/api.services.dart';
+import 'package:mero_futsal/widgets/appbar_widget.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EditImagePage extends StatefulWidget {
   const EditImagePage({Key? key}) : super(key: key);
@@ -51,9 +51,12 @@ class _EditImagePageState extends State<EditImagePage> {
                       final newImage =
                           await File(image.path).copy(imageFile.path);
                       // setState(
-                      //     () => user = user.(imagePath: newImage.path));
+                      //     () => user = user.copy(photo: newImage.path));
                     },
-                    child: Image.network(user.phone),
+                    child: Image.network(
+                      user.photo,
+                      height: 300,
+                    ),
                   ))),
           Padding(
               padding: EdgeInsets.only(top: 40),
@@ -63,7 +66,9 @@ class _EditImagePageState extends State<EditImagePage> {
                     width: 330,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: const Text(
                         'Update',
                         style: TextStyle(fontSize: 15),

@@ -1,46 +1,80 @@
-import 'package:http/http.dart';
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:http/http.dart';
+
+import 'futsal_arenas.dart';
 import 'user.dart';
 
 class APIServices {
+  static Future fetchFutsals() async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Futsals'));
 
-  static User myUser = User(
-    name: 'Test Test',
-    email: 'test.test@gmail.com',
-    address:'Kathmandu',
-    phone: '(208) 206-5039',
-    password: 'Password',
-  );
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      print(body);
+      List<FutsalArenas> allArenas =
+          body.map((dynamic item) => FutsalArenas.fromJson(item)).toList();
+      // print(allArenas);
+      return allArenas;
+    } else {
+      throw Exception('Failed to load Futsal');
+    }
+  }
 
   static Future fetchUsers() async {
-    final response = await get(Uri.parse('https://10.0.0.2:7267/Api/User'));
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Users'));
 
-    if(response.statusCode == 200){
-      return User.fromJson(jsonDecode(response.body));
-    } else{
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      List<User> users =
+          body.map((dynamic item) => User.fromJson(item)).toList();
+      return users;
+    } else {
       throw Exception('Failed to load User');
     }
   }
 
-  static Future postUser(User user) async {
+  static Future getUser(String email) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Users/$email'));
 
-    const String url = 'https://10.0.2.2:7267/Api/User/register';
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      List<User> users =
+      body.map((dynamic item) => User.fromJson(item)).toList();
+      return users;
+    } else {
+      throw Exception('Failed to load User');
+    }
+  }
+
+
+  static User myUser = User(
+      name: 'Test Test',
+      email: 'test.test@gmail.com',
+      address: 'Your Address',
+      phone: 'Your phone number',
+      password: 'Password',
+      photo:
+          "https://upload.wikimedia.org/wikipedia/commons/2/24/Baby_Madison_-_Soccer_%28Cameroon%29.png");
+
+  static Future postUser(User user) async {
+    const String url = 'https://10.0.2.2:7267/Api/Users/';
 
     Map<String, String> header = {
       'Content-type': 'application/json',
       'Accept': 'application/json'
     };
-     Map<String, String> testBody = {
-       "name":"test3",
-       "email":"we@gmail.com",
-       "password":"Test@123",
-       "address":"we",
-       "phone":"1283918902"
-       // "isAvailable":true,
-       // "isDeleted":false
+    Map<dynamic, dynamic> testBody = {
+      "name": "test3",
+      "email": "we@gmail.com",
+      "password": "Test@123",
+      "address": "we",
+      "phone": "1283918902",
+      "isAvailable":true,
+      "isDeleted":false
     };
-     var testBody1 = json.encode(testBody);
+    var testBody1 = json.encode(testBody);
     var myUser = user.toJson();
     var userBody = json.encode(myUser);
     var res = await post(Uri.parse(url), headers: header, body: testBody1);
@@ -48,8 +82,6 @@ class APIServices {
     print(res.reasonPhrase);
     print(res.body);
     print(res.toString());
-
-
 
     print(testBody);
     return res.statusCode;

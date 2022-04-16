@@ -20,17 +20,12 @@ const kFirstIntrTitleText = 'Welcome';
 const kSecondIntrTitleText = 'Manage Arenas';
 const kThirdIntrTitleTextt = 'Book Grounds';
 
-const kFirstIntrContentText =
-    'Welcome to Mero Futsal';
+const kFirstIntrContentText = 'Welcome to Mero Futsal';
 
-const kSecondIntrContentText =
-    'You can manage your futsal grounds here ! ';
+const kSecondIntrContentText = 'You can manage your futsal grounds here ! ';
 
 const kThirdIntrContentText =
     'Book you favourite futsal grounds and start playing! ';
-
-
-
 
 final TextStyle style = GoogleFonts.lato(
     fontSize: 30, color: Colors.white, fontWeight: FontWeight.w700);
@@ -38,59 +33,73 @@ const Color bleu = Color(0xFF148BFF);
 const Color red = Color(0xFFC3011B);
 const Color white = Color(0xFFDCDBEB);
 
-
-List<FutsalArenas> allArenas = [
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: red),
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: Colors.amber.shade700),
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: bleu),
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: Colors.teal),
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: Colors.amber.shade700),
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: bleu),
-
-  FutsalArenas(
-      name: 'Sherpa Futsal',
-      img: 'assets/images/one.png',
-      company: 'Baudha',
-      price: 1000,
-      isselected: false,
-      color: Colors.amber.shade700),
-];
+// List<FutsalArenas> allArenas = [
+//   FutsalArenas(
+//       futsalName: 'Sherpa Futsal',
+//       img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//   )
+//   FutsalArenas(
+//       futsalName: 'Sherpa Futsal',
+//       img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//   FutsalArenas(
+//       futsalName: 'Sherpa Futsal',
+//       img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//   FutsalArenas(
+//   futsalName: 'Sherpa Futsal',
+//   img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//   FutsalArenas(
+//       futsalName: 'Sherpa Futsal',
+//       img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//   FutsalArenas(
+//       futsalName: 'Sherpa Futsal',
+//       img: 'assets/images/one.png',
+//       location: 'Baudha',
+//       cost: 1000,
+//       isAvailable: false,
+//       color: red,
+//       ownerEmail: 'email@email.com',
+//       isDeleted: false,
+//
+//   FutsalArenas(
+// futsalName: 'Sherpa Futsal',
+// img: 'assets/images/one.png',
+// location: 'Baudha',
+// cost: 1000,
+// isAvailable: false,
+// color: red,
+// ownerEmail: 'email@email.com',
+// isDeleted: false,
+// ];
 
 List times = [6, 7, 8, 9, 10];
 

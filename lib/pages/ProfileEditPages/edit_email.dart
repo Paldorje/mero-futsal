@@ -1,7 +1,7 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/models/api.services.dart';
 import 'package:mero_futsal/widgets/appbar_widget.dart';
-import 'package:email_validator/email_validator.dart';
 
 // This class handles the Page to edit the Email Section of the User Profile.
 class EditEmailFormPage extends StatefulWidget {
@@ -56,6 +56,9 @@ class EditEmailFormPageState extends State<EditEmailFormPage> {
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your email.';
+                            } else if (!EmailValidator.validate(
+                                emailController.text)) {
+                              return 'Email address not valid';
                             }
                             return null;
                           },

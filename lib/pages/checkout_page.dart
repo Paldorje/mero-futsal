@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/cart_model.dart';
-import 'package:mero_futsal/pages/playerHome_page.dart';
+import 'package:mero_futsal/pages/Khalti.dart';
+import 'package:mero_futsal/pages/PlayerPages/playerHome_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartModel> cartModel;
+
   const CheckoutPage({Key? key, required this.cartModel}) : super(key: key);
 
   @override
@@ -15,6 +17,7 @@ class CheckoutPage extends StatefulWidget {
 
 class _CheckoutPageState extends State<CheckoutPage> {
   var isloading = false;
+
   @override
   Widget build(BuildContext context) {
     var _screenheight = MediaQuery.of(context).size.height;
@@ -172,6 +175,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
           onPressed: () {
             setState(() {
               isloading = true;
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => KhaltiPayment()));
             });
             Future.delayed(const Duration(seconds: 3)).then((value) {
               setState(() {
@@ -183,9 +190,9 @@ class _CheckoutPageState extends State<CheckoutPage> {
           child: (isloading)
               ? const CircularProgressIndicator()
               : Text(
-            'Pay Now',
-            style: style.copyWith(fontSize: 18, color: Colors.black),
-          ),
+                  'Pay Now',
+                  style: style.copyWith(fontSize: 18, color: Colors.black),
+                ),
         ),
       ),
     );
@@ -193,26 +200,26 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
   _buildawesomedialog() {
     return AwesomeDialog(
-        context: context,
-        animType: AnimType.SCALE,
-        dialogType: DialogType.SUCCES,
-        title: 'Success Payment',
-        btnOkText: 'OK',
-        btnOkIcon: Icons.check,
-        dismissOnBackKeyPress: false,
-        btnOkOnPress: () {
-          bookedGround.clear();
-          total = 0.0;
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (_) => MyHomePage()));
-        },
-        btnOkColor: Colors.green,
-        buttonsBorderRadius: BorderRadius.circular(20))
+            context: context,
+            animType: AnimType.SCALE,
+            dialogType: DialogType.SUCCES,
+            title: 'Success Payment',
+            btnOkText: 'OK',
+            btnOkIcon: Icons.check,
+            dismissOnBackKeyPress: false,
+            btnOkOnPress: () {
+              bookedGround.clear();
+              total = 0.0;
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => MyHomePage()));
+            },
+            btnOkColor: Colors.green,
+            buttonsBorderRadius: BorderRadius.circular(20))
         .show();
   }
 
   Widget _builditems(
-      {required String name, required double price, required int items}) {
+      {required String name, required int price, required int items}) {
     return Align(
       alignment: Alignment.topCenter,
       child: Row(

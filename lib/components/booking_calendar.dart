@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:booking_calendar/booking_calendar.dart';
-
+import 'package:flutter/material.dart';
 
 class BookingCalendarPage extends StatefulWidget {
   const BookingCalendarPage({Key? key}) : super(key: key);
@@ -59,36 +58,34 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xFF282638),
-            leading: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.chevron_left,
-                  size: 40,
-                ),
-              ),
-            ),
-            title: const Text('Choose Booking Date and Time'),
-          ),
-          body: Center(
-            child: BookingCalendar(
-              bookingService: mockBookingService,
-              convertStreamResultToDateTimeRanges: convertStreamResultMock,
-              getBookingStream: getBookingStreamMock,
-              uploadBooking: uploadBookingMock,
-              bookingButtonText: 'PICK',
-              bookingButtonColor: Colors.pink,
-              // loadingWidget: ,
-
-
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF282638),
+        leading: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.chevron_left,
+              size: 40,
             ),
           ),
-        );
+        ),
+        title: const Text('Choose Booking Date and Time'),
+      ),
+      body: Center(
+        child: BookingCalendar(
+          bookingService: mockBookingService,
+          convertStreamResultToDateTimeRanges: convertStreamResultMock,
+          getBookingStream: getBookingStreamMock,
+          uploadBooking: uploadBookingMock,
+          bookingButtonText: 'PICK',
+          bookingButtonColor: Colors.pink,
+          // loadingWidget: ,
+        ),
+      ),
+    );
   }
 }
