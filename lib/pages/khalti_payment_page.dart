@@ -67,25 +67,26 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                       PaymentPreference.khalti,
                     ],
                     onSuccess: (su) {
-                      const successesBar = SnackBar(
+                      const successesBar =
+                      SnackBar(
                         content: Text('Payment Successful'),
                       );
                       ScaffoldMessenger.of(context)
                           .showSnackBar(successesBar);
                     },
                     onFailure: (fa) {
-                      const failedsnackBar = SnackBar(
+                      const failedSnackBar = SnackBar(
                         content: Text('Payment Failed'),
                       );
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(failedsnackBar);
+                          .showSnackBar(failedSnackBar);
                     },
                     onCancel: () {
-                      const cancelsnackBar = SnackBar(
+                      const cancelSnackBar = SnackBar(
                         content: Text('Payment Cancelled'),
                       );
                       ScaffoldMessenger.of(context)
-                          .showSnackBar(cancelsnackBar);
+                          .showSnackBar(cancelSnackBar);
                     },
                   );
                 }),

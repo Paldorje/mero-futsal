@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
-import 'package:mero_futsal/pages/OwnerPages/ownerlogin_page.dart';
+import 'package:mero_futsal/pages/OwnerPages/owner_login_page.dart';
 
-import 'PlayerPages/playerlogin_page.dart';
+import 'PlayerPages/player_login_page.dart';
 
 class UsersPage extends StatelessWidget {
   const UsersPage({Key? key}) : super(key: key);

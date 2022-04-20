@@ -54,7 +54,7 @@ class _DetailsPageState extends State<DetailsPage> {
       child: MaterialButton(
         onPressed: () => Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MapScreen()),
+          MaterialPageRoute(builder: (context) => const MapScreen()),
         ),
         child: const Text(
           'Find location on Map',
@@ -132,21 +132,23 @@ class _DetailsPageState extends State<DetailsPage> {
                   ));
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             } else {
+              bookedGround.add(
+                CartModel(
+                  name: widget.item.futsalName,
+                  price: widget.item.cost,
+                  // location: widget.item.location,
+                  // img: widget.item.img,
+                  color: Colors.red,
+                  items: 1,
+                  size: 6,
+                ),
+              );
+              total = total + widget.item.cost;
+              Navigator.pop(context);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const BookingCalendarPage()));
-              // bookedGround.add(
-              //   CartModel(
-              //     name: widget.item.futsalName,
-              //     price: widget.item.cost,
-              //     // img: widget.item.img,
-              //     color: Colors.red,
-              //     items: 1,
-              //     size: 6,
-              //   ),
-              // );
-              // total = total + widget.item.cost;
-              // Navigator.pop(context);
             }
           },
           child: Row(

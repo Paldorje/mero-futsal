@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:mero_futsal/models/owner.dart';
 
 import 'futsal_arenas.dart';
 import 'user.dart';
@@ -25,26 +26,70 @@ class APIServices {
     }
   }
 
+  static Future fetchOwnerFutsal(String ownerEmail) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Futsals/myFutsal $ownerEmail'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(body);
+      }
+      List<FutsalArenas> ownerArena =
+          body.map((dynamic item) => FutsalArenas.fromJson(item)).toList();
+      // print(allArenas);
+      return ownerArena;
+    } else {
+      throw Exception('Failed to load Futsal');
+    }
+  }
+
   static Future fetchUsers() async {
     final response = await get(Uri.parse('https://10.0.2.2:7267/api/Users'));
-
+    print (response.statusCode);
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
       List<User> users =
           body.map((dynamic item) => User.fromJson(item)).toList();
+      print(users);
       return users;
     } else {
       throw Exception('Failed to load User');
     }
   }
 
-  static Future getUser(String email) async {
-    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Users/$email'));
-
+  static Future getOwner(String email) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Owners/byEmail$email'));
     if (response.statusCode == 200) {
-      List<dynamic> body = jsonDecode(response.body);
-      List<User> users =
-      body.map((dynamic item) => User.fromJson(item)).toList();
+      print(response.body);
+
+      Map<String, dynamic> owner =  Map<String, dynamic>
+          .from(json.decode(response.body));
+
+      print(owner);
+
+      Owner owners = Owner.fromJson(owner);
+      return owners;
+    } else {
+      throw Exception('Failed to load User');
+    }
+  }
+
+
+  static Future getUser(String email) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/Api/Users/$email'));
+    if (kDebugMode) {
+      print(response.statusCode);
+    }
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      Map<String, dynamic> user =  Map<String, dynamic>
+      .from(json.decode(response.body));
+
+      print(user);
+
+      User users = User.fromJson(user);
+
       return users;
     } else {
       throw Exception('Failed to load User');
@@ -62,41 +107,48 @@ class APIServices {
           "https://upload.wikimedia.org/wikipedia/commons/2/24/Baby_Madison_-_Soccer_%28Cameroon%29.png");
 
   static Future postUser(User user) async {
-    const String url = 'https://10.0.2.2:7267/Api/Users/';
+    const String url = 'https://10.0.2.2:7267/Api/Users/register';
 
     Map<String, String> header = {
       'Content-type': 'application/json',
       'Accept': 'application/json'
     };
-    Map<dynamic, dynamic> testBody = {
-      "name": "test3",
-      "email": "we@gmail.com",
-      "password": "Test@123",
-      "address": "we",
-      "phone": "1283918902",
-      "isAvailable":true,
-      "isDeleted":false
-    };
-    var testBody1 = json.encode(testBody);
     var myUser = user.toJson();
-    // var userBody = json.encode(myUser);
-    var res = await post(Uri.parse(url), headers: header, body: testBody1);
+    var userBody = json.encode(myUser);
+    var res = await post(Uri.parse(url), headers: header, body: userBody);
     if (kDebugMode) {
       print(res.statusCode);
     }
-    if (kDebugMode) {
-      print(res.reasonPhrase);
-    }
-    if (kDebugMode) {
-      print(res.body);
-    }
-    if (kDebugMode) {
-      print(res.toString());
-    }
+    return res.statusCode;
+  }
 
+  static Future postOwner(Owner owner) async {
+    const String url = 'https://10.0.2.2:7267/Api/Owners/';
+
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json'
+    };
+    var myOwner = owner.toJson();
+    var ownerBody = json.encode(myOwner);
+    var res = await post(Uri.parse(url), headers: header, body: ownerBody);
+    return res.statusCode;
+  }
+
+  static Future postFutsal(FutsalArenas futsalArenas) async {
+    const String url = 'https://10.0.2.2:7267/Api/Futsals/';
+
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json'
+    };
+    var myFutsal = futsalArenas.toJson();
+    var futsalBody = json.encode(myFutsal);
+    var res = await post(Uri.parse(url), headers: header, body: futsalBody);
     if (kDebugMode) {
-      print(testBody);
+      print(res.statusCode);
     }
     return res.statusCode;
   }
+
 }

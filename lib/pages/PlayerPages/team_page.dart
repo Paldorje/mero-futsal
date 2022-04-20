@@ -11,6 +11,7 @@ class Team extends StatelessWidget {
     return FutureBuilder(
         future: APIServices.fetchUsers(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          print(snapshot.data);
           if (snapshot.hasData) {
             List<User> allUsers = snapshot.data;
             return buildListView(items: allUsers);

@@ -41,7 +41,9 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
       {required BookingService newBooking}) async {
     await Future.delayed(const Duration(seconds: 1));
     converted.add(DateTimeRange(
-        start: newBooking.bookingStart, end: newBooking.bookingEnd));
+        start: newBooking.bookingStart,
+      end: newBooking.bookingEnd,
+    ));
     const Center(child: CircularProgressIndicator());
     // bookedGround.add(
     //       CartModel(
@@ -106,6 +108,7 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
           uploadBooking: uploadBookingMock,
           bookingButtonText: 'Book',
           bookingButtonColor: Colors.pink,
+          bookingExplanation: const Center(child: CircularProgressIndicator()),
           // loadingWidget: const Center(child: CircularProgressIndicator()),
         ),
       ),

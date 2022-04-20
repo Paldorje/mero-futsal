@@ -7,12 +7,12 @@ part of 'futsal_arenas.dart';
 // **************************************************************************
 
 FutsalArenas _$FutsalArenasFromJson(Map<String, dynamic> json) => FutsalArenas(
-      json['futsalName'] as String,
-      json['location'] as String,
-      json['ownerEmail'] as String,
-      json['cost'] as int,
-      json['isReserved'] as bool,
-      json['isDeleted'] as bool,
+      futsalName: json['futsalName'] as String,
+      location: json['location'] as String,
+      ownerEmail: json['ownerEmail'] as String,
+      cost: json['cost'] as int,
+      isReserved: json['isReserved'] as bool,
+      isDeleted: json['isDeleted'] as bool,
     );
 
 Map<String, dynamic> _$FutsalArenasToJson(FutsalArenas instance) =>

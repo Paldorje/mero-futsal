@@ -10,8 +10,8 @@ class FutsalArenas {
   // String img, color;
   int cost;
 
-  FutsalArenas(this.futsalName, this.location, this.ownerEmail, this.cost,
-      this.isReserved, this.isDeleted);
+  FutsalArenas({required this.futsalName, required this.location, required this.ownerEmail, required this.cost,
+      required this.isReserved, required this.isDeleted});
 
   factory FutsalArenas.fromJson(Map<String, dynamic> json) =>
       _$FutsalArenasFromJson(json);

@@ -109,6 +109,7 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
                 CartModel(
                   name: widget.item.futsalName,
                   price: widget.item.cost,
+                  // location: widget.item.location,
                   // img: widget.item.img,
                   color: Colors.red,
                   items: 1,

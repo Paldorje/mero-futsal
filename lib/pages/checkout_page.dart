@@ -4,7 +4,7 @@ import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/pages/khalti.dart';
-import 'package:mero_futsal/pages/PlayerPages/playerhome_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/player_home_page.dart';
 
 class CheckoutPage extends StatefulWidget {
   final List<CartModel> cartModel;
@@ -180,22 +180,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   MaterialPageRoute(
                       builder: (context) => const KhaltiPayment()));
             });
-            Future.delayed(const Duration(seconds: 3)).then((value) {
-              setState(() {
-                isloading = false;
-              });
-              _buildawesomedialog();
-            });
-          },
-          child: (isloading)
-              ? const CircularProgressIndicator()
-              : Text(
-                  'Pay Now',
-                  style: style.copyWith(fontSize: 18, color: Colors.black),
-                ),
+            //   Future.delayed(const Duration(seconds: 3)).then((value) {
+            //     setState(() {
+            //       isloading = false;
+            //     });
+            //     _buildawesomedialog();
+            //   });
+            // },
+            // child: (isloading)
+            //     ? const CircularProgressIndicator()
+            //     :
+            Text(
+              'Pay Now',
+              style: style.copyWith(fontSize: 18, color: Colors.black),
+            );
+          })
         ),
-      ),
-    );
+      );
   }
 
   _buildawesomedialog() {
@@ -211,7 +212,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               bookedGround.clear();
               total = 0.0;
               Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => const MyHomePage()));
+                  context, MaterialPageRoute(builder: (_) => const MyHomePage(userEmail: 'idk',)));
             },
             btnOkColor: Colors.green,
             buttonsBorderRadius: BorderRadius.circular(20))
@@ -230,7 +231,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
           const Spacer(),
           Text(
-            '\$$price',
+            'Rs $price',
             style: style.copyWith(fontSize: 12, color: Colors.black),
           )
         ],
