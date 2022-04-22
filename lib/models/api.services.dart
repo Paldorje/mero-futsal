@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
+import 'package:mero_futsal/models/bookings.dart';
 import 'package:mero_futsal/models/owner.dart';
 
 import 'futsal_arenas.dart';
@@ -21,6 +22,23 @@ class APIServices {
           body.map((dynamic item) => FutsalArenas.fromJson(item)).toList();
       // print(allArenas);
       return allArenas;
+    } else {
+      throw Exception('Failed to load Futsal');
+    }
+  }
+
+  static Future fetchBookingsByFutsal(int futsalId) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Bookings/byFutsal $futsalId'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(body);
+      }
+      List<Bookings> allBookings =
+      body.map((dynamic item) => Bookings.fromJson(item)).toList();
+      print(allBookings);
+      return allBookings;
     } else {
       throw Exception('Failed to load Futsal');
     }

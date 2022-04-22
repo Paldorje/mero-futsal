@@ -35,14 +35,14 @@ class _RegisterFutsalState extends State<RegisterFutsal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
-        title: const Center(
-          child: Text(
-            "Register Futsal",
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: const Color.fromRGBO(40, 38, 56, 1),
+      //   title: const Center(
+      //     child: Text(
+      //       "Register Futsal",
+      //     ),
+      //   ),
+      // ),
       body: ListView(children: [
         Visibility(
           visible: _isVisible,

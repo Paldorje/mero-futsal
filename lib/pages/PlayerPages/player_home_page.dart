@@ -6,7 +6,7 @@ import 'package:mero_futsal/models/futsal_arenas.dart';
 import 'package:mero_futsal/pages/PlayerPages/team_page.dart';
 import 'package:mero_futsal/pages/details_page.dart';
 import 'package:mero_futsal/pages/favorite_page.dart';
-import 'package:mero_futsal/pages/my_cart_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/my_cart_page.dart';
 import 'package:mero_futsal/pages/PlayerPages/player_profile_page.dart';
 
 import '../../models/api.services.dart';

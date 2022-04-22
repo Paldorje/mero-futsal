@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/futsal_arenas.dart';
 import 'package:mero_futsal/pages/OwnerPages/register_futsal_page.dart';
-import 'package:mero_futsal/pages/my_cart_page.dart';
+import 'package:mero_futsal/pages/PlayerPages/my_cart_page.dart';
 import '../../models/api.services.dart';
+import 'owner_booking_page.dart';
 import 'owner_profile_page.dart';
 
 class OwnerHomePage extends StatefulWidget {
@@ -88,15 +89,13 @@ class _OwnerHomePageState extends State<OwnerHomePage>
                       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                         if (snapshot.hasData) {
                           List<FutsalArenas> allArenas = snapshot.data;
-                          return _buildlistitem(items: allArenas);}
-                        else{
-                          WidgetsBinding.instance!.addPostFrameCallback((_) {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => RegisterFutsal(email: widget.email)));
-                          });
-                        }
+                          if(allArenas.isEmpty){
+                            return RegisterFutsal(email: widget.email);
+                          }else{
+                          return _buildlistitem(items: allArenas);}}
                         return const Center(child: CircularProgressIndicator());}),
                   OwnerProfilePage(email: widget.email),
-                  const MyCart(),
+                  const MyBookings(),
                 ]),
               ),
               const SizedBox(
