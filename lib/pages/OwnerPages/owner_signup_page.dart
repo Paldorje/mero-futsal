@@ -244,7 +244,7 @@ class _SignupPageContent extends State<SignupPageContent> {
                           password: passwordController1.text,
                           address: 'Add Address',
                           phone: 'Add Phone',
-                          email: emailController.text,
+                          email: emailController.text.toLowerCase(),
                           photo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Baby_Madison_-_Soccer_%28Cameroon%29.png',
                           isDeleted: false,
                           isAvailable: true);

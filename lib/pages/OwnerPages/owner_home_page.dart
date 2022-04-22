@@ -136,9 +136,9 @@ class _OwnerHomePageState extends State<OwnerHomePage>
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/one.png',
+                  'assets/images/two.png',
                   fit: BoxFit.cover,
-                  width: 130,
+                  width: 180,
                 ),
               ),
               Column(

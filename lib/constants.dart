@@ -38,4 +38,3 @@ List times = [6, 7, 8, 9, 10];
 List<CartModel> bookedGround = [];
 List<FutsalArenas> favouriteArenas = [];
 
-double total = 0.00;

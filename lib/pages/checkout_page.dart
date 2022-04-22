@@ -5,9 +5,13 @@ import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/pages/khalti.dart';
 import 'package:mero_futsal/pages/PlayerPages/player_home_page.dart';
+import 'package:intl/intl.dart';
+
+DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+DateFormat format = DateFormat("yyyy-MM-dd ");
 
 class CheckoutPage extends StatefulWidget {
-  final List<CartModel> cartModel;
+  final CartModel cartModel;
 
   const CheckoutPage({Key? key, required this.cartModel}) : super(key: key);
 
@@ -15,9 +19,15 @@ class CheckoutPage extends StatefulWidget {
   State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
+
 class _CheckoutPageState extends State<CheckoutPage> {
   var isloading = false;
 
+  @override
+  void initState() {
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     var _screenheight = MediaQuery.of(context).size.height;
@@ -65,51 +75,27 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Image.asset(
-                              'assets/images/shop.png',
-                              width: 80,
+                              'assets/images/checkout.png',
+                              width: 100,
                             ),
                             const SizedBox(
                               height: 10,
                             ),
                             Text(
-                              'Mero Futsal',
+                              'Your Bill',
                               style: style.copyWith(
-                                  color: Colors.black, fontSize: 16),
+                                  color: Colors.black, fontSize: 20),
                             ),
-                            const SizedBox(
-                              height: 30,
-                            ),
-                            Text(
-                              '\$$total',
-                              maxLines: 1,
-                              style: style.copyWith(
-                                  color: Colors.black, fontSize: 40),
-                            ),
+
                             const SizedBox(
                               height: 20,
                             ),
-                            const Divider(
-                              color: Colors.grey,
-                              thickness: 1,
-                              endIndent: 10,
-                              indent: 10,
-                            ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    DateTime.now().toString().substring(0, 16),
-                                    style: style.copyWith(
-                                        fontSize: 12, color: Colors.black),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    'Visa #3246445',
-                                    style: style.copyWith(
-                                        fontSize: 12, color: Colors.black),
-                                  )
-                                ],
+                              child: Text(
+                                widget.cartModel.name,
+                                style: style.copyWith(
+                                    fontSize: 12, color: Colors.black),
                               ),
                             ),
                             const Divider(
@@ -118,30 +104,51 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               endIndent: 10,
                               thickness: 1,
                             ),
-                            const SizedBox(
-                              height: 20,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                    'Booked Time: ' + dateFormat.format(widget.cartModel.bookedTime),
+                                    style: style.copyWith(
+                                        fontSize: 12, color: Colors.black),
+                                  ),
                             ),
-                            Expanded(
-                                flex: 2,
-                                child: ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const BouncingScrollPhysics(),
-                                    itemCount: widget.cartModel.length,
-                                    itemBuilder: (context, index) {
-                                      return _builditems(
-                                          name: widget.cartModel[index].name,
-                                          price: widget.cartModel[index].price,
-                                          items: widget.cartModel[index].items);
-                                    })),
+                            const Divider(
+                              color: Colors.grey,
+                              indent: 10,
+                              endIndent: 10,
+                              thickness: 1,
+                            ),
+
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                'Booked Date: ' + format.format(widget.cartModel.bookedTime),
+                                style: style.copyWith(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ),
+                            const Divider(
+                              color: Colors.grey,
+                              indent: 10,
+                              endIndent: 10,
+                              thickness: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text(
+                                'Rs: ' + widget.cartModel.price.toString(),
+                                style: style.copyWith(
+                                    fontSize: 12, color: Colors.black),
+                              ),
+                            ),
                             const SizedBox(
-                              height: 15,
+                              height: 40,
                             ),
                             Expanded(
                                 flex: 1,
                                 child: Column(
                                   children: const [
-                                    Text('www.merofutsal.com'),
-                                    Text('098003202'),
+                                    Text('2022 © MeroFutsal'),
                                   ],
                                 )),
                             const SizedBox(
@@ -172,6 +179,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: white),
         child: MaterialButton(
+            child: Text(
+              'Pay Now',
+
+              style: style.copyWith(fontSize: 18, color: Colors.red),
+            ),
           onPressed: () {
             setState(() {
               isloading = true;
@@ -190,10 +202,6 @@ class _CheckoutPageState extends State<CheckoutPage> {
             // child: (isloading)
             //     ? const CircularProgressIndicator()
             //     :
-            Text(
-              'Pay Now',
-              style: style.copyWith(fontSize: 18, color: Colors.black),
-            );
           })
         ),
       );
@@ -210,7 +218,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
             dismissOnBackKeyPress: false,
             btnOkOnPress: () {
               bookedGround.clear();
-              total = 0.0;
+              // total = 0.0;
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => const MyHomePage(userEmail: 'idk',)));
             },

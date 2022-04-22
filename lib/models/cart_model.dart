@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 class CartModel {
   // String img;
   String name;
-  // String location;
+  DateTime bookedTime;
   int price;
   int items;
   Color color;
@@ -12,7 +12,7 @@ class CartModel {
 
   CartModel({
     required this.name,
-    // required this.location,
+    required this.bookedTime,
     required this.price,
     required this.items,
     // required this.img,

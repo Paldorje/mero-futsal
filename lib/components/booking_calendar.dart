@@ -1,15 +1,19 @@
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:material_dialogs/material_dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
 import '../constants.dart';
 import '../models/cart_model.dart';
 import '../models/futsal_arenas.dart';
+import '../pages/checkout_page.dart';
 
 class BookingCalendarPage extends StatefulWidget {
-  // final FutsalArenas item;
+  final FutsalArenas item;
   const BookingCalendarPage({Key? key,
-    // required this.item
+    required this.item
   }) : super(key: key);
 
   @override
@@ -39,24 +43,60 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
 
   Future<dynamic> uploadBookingMock(
       {required BookingService newBooking}) async {
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 0));
     converted.add(DateTimeRange(
         start: newBooking.bookingStart,
       end: newBooking.bookingEnd,
-    ));
+    )
+
+    );
     const Center(child: CircularProgressIndicator());
-    // bookedGround.add(
-    //       CartModel(
-    //         name: widget.item.futsalName,
-    //         price: widget.item.cost,
-    //         // img: widget.item.img,
-    //         color: Colors.red,
-    //         items: 1,
-    //         size: 6,
-    //       ),
-    //     );
-    //     total = total + widget.item.cost;
-    //     Navigator.pop(context);
+    bookedGround.add(
+          CartModel(
+            name: widget.item.futsalName,
+            price: widget.item.cost,
+            // img: widget.item.img,
+            color: Colors.red,
+            bookedTime: newBooking.bookingStart,
+            items: 1,
+            size: 6,
+          ),
+
+        );
+        // total = total + widget.item.cost;
+
+    Dialogs.materialDialog(
+        msg: 'Confirm your booking by making the payment ?',
+        title: "Booking Has been Added",
+        color: Colors.white,
+        context: context,
+        actions: [
+          IconsOutlineButton(
+            onPressed: () {
+              // Navigator.pop(context);
+              Navigator.of(context, rootNavigator: true).pop();
+            },
+            text: 'Later',
+            iconData: Icons.cancel_outlined,
+            textStyle: const TextStyle(color: Colors.grey),
+            iconColor: Colors.grey,
+          ),
+          IconsButton(
+            onPressed: () {
+              Navigator.of(context, rootNavigator: true).pop();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CheckoutPage(cartModel:bookedGround as CartModel,)));
+            },
+
+            text: 'Pay Now',
+            iconData: Icons.attach_money,
+            color: Colors.red,
+            textStyle: const TextStyle(color: Colors.white),
+            iconColor: Colors.white,
+          ),
+        ]);
+    // Navigator.pop(context);
     if (kDebugMode) {
       print('${newBooking.toJson()} has been uploaded');
     }
@@ -108,7 +148,7 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
           uploadBooking: uploadBookingMock,
           bookingButtonText: 'Book',
           bookingButtonColor: Colors.pink,
-          bookingExplanation: const Center(child: CircularProgressIndicator()),
+          // bookingExplanation: const Center(child: CircularProgressIndicator()),
           // loadingWidget: const Center(child: CircularProgressIndicator()),
         ),
       ),

@@ -109,6 +109,7 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
                 CartModel(
                   name: widget.item.futsalName,
                   price: widget.item.cost,
+                  bookedTime: DateTime.now(),
                   // location: widget.item.location,
                   // img: widget.item.img,
                   color: Colors.red,
@@ -116,7 +117,7 @@ class _EditDetailsPageState extends State<EditDetailsPage> {
                   size: times[value],
                 ),
               );
-              total = total + widget.item.cost;
+              // total = total + widget.item.cost;
               Navigator.pop(context);
             }
           },

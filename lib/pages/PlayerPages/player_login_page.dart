@@ -181,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   MaterialPageRoute(builder: (context) => MyHomePage()),
                     //   (Route<dynamic> route) => false,
                     // );
-                    login(emailController.text.toString(),
+                    login(emailController.text.toString().toLowerCase(),
                         passwordController.text.toString());
                   }),
             ),

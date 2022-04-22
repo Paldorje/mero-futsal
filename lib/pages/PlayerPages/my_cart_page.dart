@@ -1,7 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_futsal/constants.dart';
+import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/pages/checkout_page.dart';
+import 'package:intl/intl.dart';
+
+DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 class MyCart extends StatefulWidget {
   const MyCart({Key? key}) : super(key: key);
@@ -81,11 +85,11 @@ class _MyCartState extends State<MyCart> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => CheckoutPage(
-                                                  cartModel: bookedGround,
+                                                  cartModel: bookedGround as CartModel,
                                                 )));
                                   },
                                   child: Text(
-                                    'Chekout',
+                                    'Checkout',
                                     style: style.copyWith(
                                         color: white, fontSize: 20),
                                   ),
@@ -98,7 +102,8 @@ class _MyCartState extends State<MyCart> {
                             Expanded(
                               flex: 1,
                               child: Text(
-                                'Total = Rs $total',
+                                'Total = Rs ',
+                                    // '$total',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: style.copyWith(
@@ -125,10 +130,10 @@ class _MyCartState extends State<MyCart> {
 
   Widget _buildcartitem({required int index}) {
     return Dismissible(
-      key: Key(bookedGround[index].name),
+      key: UniqueKey(),
       onDismissed: (dir) {
         setState(() {
-          total = total - bookedGround[index].price;
+          // total = total - bookedGround[index].price;
           bookedGround.remove(bookedGround[index]);
         });
       },
@@ -170,41 +175,47 @@ class _MyCartState extends State<MyCart> {
                 child: Image.asset(
                   'assets/images/two.png',
                   fit: BoxFit.cover,
-                  width: 80,
-                  height: 65,
+                  width: 110,
+                  height: 85,
                 )),
             const SizedBox(
               width: 10,
             ),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    bookedGround[index].name,
-                    maxLines: 1,
-                    style: style.copyWith(fontSize: 16, color: Colors.black),
-                  ),
-                  Text(
-                    'Rs ${bookedGround[index].price}',
-                    maxLines: 1,
-                    style: style.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
-                  Text(
-                    'Location : ${bookedGround[index].items}',
-                    style: style.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: (){Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CheckoutPage(cartModel:bookedGround[index])));},
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Futsal Name: ' + bookedGround[index].name,
+                      maxLines: 1,
+                      style: style.copyWith(fontSize: 16, color: Colors.black),
+                    ),
+                    Text(
+                      'Price: Rs ${bookedGround[index].price}',
+                      maxLines: 1,
+                      style: style.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      'Booked Time: '
+                        + DateFormat.jm().format(bookedGround[index].bookedTime),
+                      style: style.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
             ),
             // Column(
@@ -231,6 +242,7 @@ class _MyCartState extends State<MyCart> {
       ),
     );
   }
+
 
   // Widget _additems({required int item, required int index}) {
   //   return Row(

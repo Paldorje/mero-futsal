@@ -175,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialStateProperty.all(kOwnerButtonColor),
                   ),
                   onPressed: () {
-                    login(emailController.text.toString(),
+                    login(emailController.text.toString().toLowerCase(),
                         passwordController.text.toString());
                   }),
             ),

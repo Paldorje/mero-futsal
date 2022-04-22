@@ -120,36 +120,37 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         child: MaterialButton(
           onPressed: () {
-            if (bookedGround
-                .map((item) => item.name)
-                .contains(widget.item.futsalName)) {
-              final snackBar = SnackBar(
-                  backgroundColor: Colors.teal,
-                  duration: const Duration(seconds: 2),
-                  content: Text(
-                    'You have already booked ground from this futsal.',
-                    style: style.copyWith(fontSize: 14, color: Colors.white),
-                  ));
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            } else {
-              bookedGround.add(
-                CartModel(
-                  name: widget.item.futsalName,
-                  price: widget.item.cost,
-                  // location: widget.item.location,
-                  // img: widget.item.img,
-                  color: Colors.red,
-                  items: 1,
-                  size: 6,
-                ),
-              );
-              total = total + widget.item.cost;
-              Navigator.pop(context);
+            // if (bookedGround
+            //     .map((item) => item.name)
+            //     .contains(widget.item.futsalName)) {
+            //   final snackBar = SnackBar(
+            //       backgroundColor: Colors.teal,
+            //       duration: const Duration(seconds: 2),
+            //       content: Text(
+            //         'You have already booked ground from this futsal.',
+            //         style: style.copyWith(fontSize: 14, color: Colors.white),
+            //       ));
+            //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            // } else {
+              // bookedGround.add(
+              //   CartModel(
+              //     name: widget.item.futsalName,
+              //     price: widget.item.cost,
+              //
+              //     // location: widget.item.location,
+              //     // img: widget.item.img,
+              //     color: Colors.red,
+              //     items: 1,
+              //     size: 6,
+              //   ),
+              // );
+              // total = total + widget.item.cost;
+              // Navigator.pop(context);
 
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const BookingCalendarPage()));
-            }
+                  MaterialPageRoute(builder: (context) => BookingCalendarPage(item: widget.item,)));
+            // }
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

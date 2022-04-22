@@ -15,7 +15,6 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
     return int.parse(amountController.text) * 100; // Converting to paisa
   }
 
-
   @override
   void initState() {
     super.initState();

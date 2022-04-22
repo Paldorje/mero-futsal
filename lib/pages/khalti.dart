@@ -14,7 +14,7 @@ class _KhaltiPaymentState extends State<KhaltiPayment> {
   @override
   Widget build(BuildContext context) {
     final config = PaymentConfig(
-      amount: 10000, // Amount should be in paisa
+      amount: 1000, // Amount should be in paisa
       productIdentity: 'dell-g5-g5510-2021',
       productName: 'Dell G5 G5510 2021',
       productUrl: 'https://www.khalti.com/#/bazaar',
@@ -42,7 +42,7 @@ class _KhaltiPaymentState extends State<KhaltiPayment> {
             title: 'Khalti Payment',
             home: KhaltiButton(
               config: config,
-              preferences: [ // Not providing this will enable all the payment methods.
+              preferences: const [ // Not providing this will enable all the payment methods.
                 PaymentPreference.khalti,
                 // PaymentPreference.eBanking,
               ],
