@@ -27,9 +27,43 @@ class APIServices {
     }
   }
 
+  static Future fetchFutsalById(int futsalId) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Futsals/$futsalId'));
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(body);
+      }
+      List<FutsalArenas> ownerArena =
+      body.map((dynamic item) => FutsalArenas.fromJson(item)).toList();
+      print(ownerArena);
+      return ownerArena;
+    } else {
+      throw Exception('Failed to load Futsal');
+    }
+  }
+
   static Future fetchBookingsByFutsal(int futsalId) async {
     final response = await get(Uri.parse('https://10.0.2.2:7267/api/Bookings/byFutsal $futsalId'));
 
+    if (response.statusCode == 200) {
+      List<dynamic> body = jsonDecode(response.body);
+      if (kDebugMode) {
+        print(body);
+      }
+      List<Bookings> allBookings =
+      body.map((dynamic item) => Bookings.fromJson(item)).toList();
+      print(allBookings);
+      return allBookings;
+    } else {
+      throw Exception('Failed to load Futsal');
+    }
+  }
+
+  static Future fetchBookingsByEmail(String email) async {
+    final response = await get(Uri.parse('https://10.0.2.2:7267/api/Bookings/byEmail $email'));
+print(response.statusCode);
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
       if (kDebugMode) {
@@ -163,6 +197,22 @@ class APIServices {
     var myFutsal = futsalArenas.toJson();
     var futsalBody = json.encode(myFutsal);
     var res = await post(Uri.parse(url), headers: header, body: futsalBody);
+    if (kDebugMode) {
+      print(res.statusCode);
+    }
+    return res.statusCode;
+  }
+
+  static Future postBooking(Bookings bookings) async {
+    const String url = 'https://10.0.2.2:7267/Api/Bookings/';
+
+    Map<String, String> header = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json'
+    };
+    var myBooking = bookings.toJson();
+    var bookingBody = json.encode(myBooking);
+    var res = await post(Uri.parse(url), headers: header, body: bookingBody);
     if (kDebugMode) {
       print(res.statusCode);
     }

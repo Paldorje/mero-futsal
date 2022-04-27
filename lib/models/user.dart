@@ -5,7 +5,8 @@ part 'user.g.dart';
 @JsonSerializable()
 class User {
   // final int id;
-  String name, email, password, address, phone, photo;
+  String name, email, address, phone, photo;
+  String? password, passwordHash, passwordSalt;
   bool? isAvailable, isDeleted;
 
   User(

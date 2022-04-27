@@ -51,17 +51,17 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
 
     );
     const Center(child: CircularProgressIndicator());
+    CartModel booking = CartModel(
+      name: widget.item.futsalName,
+      price: widget.item.cost,
+      // img: widget.item.img,
+      color: Colors.red,
+      bookedTime: newBooking.bookingStart,
+      items: 1,
+      size: 6,
+    );
     bookedGround.add(
-          CartModel(
-            name: widget.item.futsalName,
-            price: widget.item.cost,
-            // img: widget.item.img,
-            color: Colors.red,
-            bookedTime: newBooking.bookingStart,
-            items: 1,
-            size: 6,
-          ),
-
+          booking
         );
         // total = total + widget.item.cost;
 
@@ -86,7 +86,7 @@ class _BookingCalendarPageState extends State<BookingCalendarPage> {
               Navigator.of(context, rootNavigator: true).pop();
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CheckoutPage(cartModel:bookedGround as CartModel,)));
+                  MaterialPageRoute(builder: (context) => CheckoutPage(cartModel:booking)));
             },
 
             text: 'Pay Now',

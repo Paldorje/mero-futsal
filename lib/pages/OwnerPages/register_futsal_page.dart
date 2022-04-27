@@ -121,6 +121,7 @@ class _RegisterFutsalState extends State<RegisterFutsal> {
                     _controllerPrice.text != "") {
 
                   FutsalArenas futsal = FutsalArenas(
+                    futsalId: 0,
                     futsalName: _controllerName.text,
                     location: _controllerLocation.text,
                     cost: int.parse(_controllerPrice.text),

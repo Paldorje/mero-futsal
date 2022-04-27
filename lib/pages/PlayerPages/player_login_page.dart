@@ -54,6 +54,18 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   bool _isObscure = true;
   bool _isVisible = false;
+  String returnVisibilityString = "";
+
+  bool returnVisibility( String email, String password) {
+    if (email == "") {
+      returnVisibilityString = "Email cannot be Empty";
+    } else if(password == ""){
+      returnVisibilityString = "Password cannot be Empty";
+    } else if (email == "") {
+      returnVisibilityString = "Email cannot be empty";
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,9 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(10),
-                child: const Text(
-                  "Wrong credentials entered",
-                  style: TextStyle(
+                child: Text(
+                  returnVisibilityString,
+                  style: const TextStyle(
                     color: Colors.red,
                     fontSize: 10,
                   ),
@@ -176,13 +188,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialStateProperty.all(kPlayerButtonColor),
                   ),
                   onPressed: () {
-                    // Navigator.pushAndRemoveUntil(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => MyHomePage()),
-                    //   (Route<dynamic> route) => false,
-                    // );
-                    login(emailController.text.toString().toLowerCase(),
-                        passwordController.text.toString());
+                    if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
+                      login(emailController.text.toString().toLowerCase(),
+                          passwordController.text.toString());}else{
+                      setState(() {
+                        _isVisible = true;
+                        returnVisibility(emailController.text, passwordController.text);
+                      });
+                    }
                   }),
             ),
 
@@ -238,6 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
         } else {
           setState(() {
             _isVisible = true;
+            returnVisibilityString = 'Log in Credentials Does not match';
           });
         }
         if (kDebugMode) {

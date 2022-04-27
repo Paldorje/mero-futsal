@@ -225,7 +225,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ),
             Center(
               child: Image.asset(
-                'assets/images/one.png',
+                'assets/images/f1.png',
                 width: 450,
                 height: 355,
                 fit: BoxFit.cover,

@@ -5,7 +5,9 @@ import 'package:mero_futsal/models/cart_model.dart';
 import 'package:mero_futsal/pages/checkout_page.dart';
 import 'package:intl/intl.dart';
 
-DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+import 'booking_history.dart';
+
+DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
 class MyCart extends StatefulWidget {
   const MyCart({Key? key}) : super(key: key);
@@ -48,82 +50,78 @@ class _MyCartState extends State<MyCart> {
         ),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: bookedGround.isNotEmpty
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                          height: _screenHeight * .4,
-                          child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: bookedGround.length,
-                              itemBuilder: (context, index) {
-                                return index % 2 == 0
-                                    ? BounceInLeft(
-                                        child: _buildcartitem(index: index))
-                                    : BounceInRight(
-                                        child: _buildcartitem(index: index));
-                              })),
-                      const SizedBox(
-                        height: 39,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Container(
-                                width: _screenWidth * .4,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: bleu),
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => CheckoutPage(
-                                                  cartModel: bookedGround as CartModel,
-                                                )));
-                                  },
-                                  child: Text(
-                                    'Checkout',
-                                    style: style.copyWith(
-                                        color: white, fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Text(
-                                'Total = Rs ',
-                                    // '$total',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: style.copyWith(
-                                    fontSize: 14, color: Colors.black),
-                              ),
-                            )
-                          ],
+            child: Column(
+              children:[ bookedGround.isNotEmpty
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                            height: _screenHeight * .7,
+                            child: ListView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: bookedGround.length,
+                                itemBuilder: (context, index) {
+                                  return index % 2 == 0
+                                      ? BounceInLeft(
+                                          child: _buildcartitem(index: index))
+                                      : BounceInRight(
+                                          child: _buildcartitem(index: index));
+                                })),
+                        const SizedBox(
+                          height: 15,
                         ),
-                      )
-                    ],
-                  )
-                : Center(
-                    child: Text(
-                      'Nothing To Show',
-                      style: style.copyWith(
-                        color: Colors.black,
-                        fontSize: 24,
+                      ],
+                    )
+                  : Center(
+                      child: Text(
+                        'Nothing To Show',
+                        style: style.copyWith(
+                          color: Colors.black,
+                          fontSize: 24,
+                        ),
                       ),
                     ),
-                  )),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          width: _screenWidth * .4,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.pink),
+                          child: MaterialButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => BookingHistory()));
+                            },
+                            child: Row(
+                              children: [
+                                const Icon(Icons.history, color: Colors.white,),
+                                const Spacer(),
+                                Text(
+                                  'View My Booking History',
+                                  style: style.copyWith(
+                                      color: white, fontSize: 20),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  ),
+                )
+                ],
+            )),
       ),
     );
   }
@@ -214,88 +212,23 @@ class _MyCartState extends State<MyCart> {
                           fontWeight: FontWeight.w600,
                           color: Colors.black),
                     ),
+
+                    Text(
+                      'Booked Date: '
+                          + dateFormat.format(bookedGround[index].bookedTime),
+                      style: style.copyWith(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
+                    ),
                   ],
                 ),
               ),
             ),
-            // Column(
-            //   children: [
-            //     _additems(
-            //       item: bookedGround[index].items,
-            //       index: index,
-            //     ),
-            //     const SizedBox(
-            //       height: 10,
-            //     ),
-            //     Text(
-            //       'Time: ${bookedGround[index].size}  ',
-            //       maxLines: 1,
-            //       style: style.copyWith(
-            //           fontSize: 14,
-            //           fontWeight: FontWeight.w600,
-            //           color: Colors.black),
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),
     );
   }
-
-
-  // Widget _additems({required int item, required int index}) {
-  //   return Row(
-  //     children: [
-  //       InkWell(
-  //         onTap: () {
-  //           setState(() {
-  //             final originalprice =
-  //                 bookedGround[index].price / bookedGround[index].items;
-  //
-  //             bookedGround[index].items++;
-  //
-  //             bookedGround[index].price =
-  //                 (originalprice * bookedGround[index].items) as int;
-  //             total = total + originalprice;
-  //           });
-  //         },
-  //         child: Text('',
-  //             style: style.copyWith(
-  //               fontSize: 20,
-  //             )),
-  //       ),
-        // Container(
-        //   padding: const EdgeInsets.all(5),
-        //   margin: const EdgeInsets.all(8),
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(6),
-        //     color: Colors.black,
-        //   ),
-          // child: Text(item.toString(),
-          //     style: style.copyWith(
-          //       fontSize: 12,
-          //     )),
-        // ),
-        // InkWell(
-        //   onTap: () {
-        //     setState(() {
-        //       final originalprice =
-        //           bookedGround[index].price / bookedGround[index].items;
-        //
-        //       if (bookedGround[index].items > 1) {
-        //         bookedGround[index].items--;
-        //         bookedGround[index].price =
-        //             (bookedGround[index].price - originalprice) as int;
-        //
-        //         total = total - originalprice;
-        //       }
-        //     });
-        //   },
-        //   child: Text('',
-        //       style: style.copyWith(fontSize: 20, fontWeight: FontWeight.w900)),
-        // ),
-      // ],
-    // );
-  // }
 }
+

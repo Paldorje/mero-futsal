@@ -4,6 +4,12 @@ import 'package:mero_futsal/constants.dart';
 import 'package:mero_futsal/models/api.services.dart';
 
 import '../../models/bookings.dart';
+import '../../models/user.dart';
+
+
+import 'package:intl/intl.dart';
+
+DateFormat dateFormat = DateFormat("yyyy-MM-dd");
 
 class MyBookings extends StatefulWidget {
   const MyBookings({Key? key}) : super(key: key);
@@ -116,12 +122,12 @@ class _MyBookingsState extends State<MyBookings> {
 
                   Text(
 
-                    myItems[index].bookingId.toString(),
+                    'Booking Id: ' + myItems[index].bookingId.toString(),
                     maxLines: 1,
                     style: style.copyWith(fontSize: 16, color: Colors.black),
                   ),
                   Text(
-                    myItems[index].bookingTime.toString(),
+                    'Booked On: ' + dateFormat.format(myItems[index].bookingTime),
                     maxLines: 1,
                     style: style.copyWith(
                         fontSize: 14,
@@ -129,19 +135,31 @@ class _MyBookingsState extends State<MyBookings> {
                         color: Colors.black),
                   ),
                   Text(
-                    myItems[index].bookedTime,
+                    'Booked Time:' + myItems[index].bookedTime,
                     style: style.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.black),
                   ),
-                  Text(
-                    myItems[index].currentUserEmail,
-                    style: style.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
+                  FutureBuilder(
+                      future: APIServices.getUser(myItems[index].currentUserEmail),
+                      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                        if (snapshot.hasData) {
+                          // print(snapshot.data);
+                          User myUser = snapshot.data;
+                          print(myUser);
+                          if (snapshot.hasData){
+                            return  Text(
+                              'Booked By: '+ myUser.name,
+                              style: style.copyWith(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                            );
+                          }
+                        }
+                        return const Center(child: CircularProgressIndicator());
+                      }),
                 ],
               ),
             ],

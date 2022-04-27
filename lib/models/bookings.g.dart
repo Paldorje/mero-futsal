@@ -7,10 +7,10 @@ part of 'bookings.dart';
 // **************************************************************************
 
 Bookings _$BookingsFromJson(Map<String, dynamic> json) => Bookings(
-      bookingId: json['bookingId'] as int,
+      bookingId: json['bookingId'] as int?,
       currentUserEmail: json['currentUserEmail'] as String,
-      futsalId: json['futsalId'] as int,
-      isDeleted: json['isDeleted'] as bool,
+      futsalId: json['futsalId'] as int?,
+      isDeleted: json['isDeleted'] as bool?,
       bookedTime: json['bookedTime'] as String,
       bookingTime: DateTime.parse(json['bookingTime'] as String),
     );

@@ -23,7 +23,7 @@ class MeroFutsal extends StatelessWidget {
         localizationsDelegates: const [
           KhaltiLocalizations.delegate,
         ],
-      home: const AnimatedIntroductionSlider(),
+      home: const AnimatedIntroductionSlider(title:"Guu" ,),
     );
   }
 }

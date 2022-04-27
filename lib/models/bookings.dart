@@ -4,10 +4,10 @@ part 'bookings.g.dart';
 
 @JsonSerializable()
 class Bookings {
-  int bookingId;
-  int futsalId;
+  int? bookingId;
+  int? futsalId;
   String currentUserEmail, bookedTime;
-  bool isDeleted;
+  bool? isDeleted;
   DateTime bookingTime;
 
   Bookings(

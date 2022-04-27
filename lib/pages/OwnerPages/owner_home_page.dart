@@ -131,14 +131,15 @@ class _OwnerHomePageState extends State<OwnerHomePage>
                   offset: Offset(0, 10))
             ]),
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(0.0),
           child: Stack(
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/two.png',
+                  'assets/images/f1.png',
                   fit: BoxFit.cover,
-                  width: 180,
+                  width: 400,
+                  height: 450,
                 ),
               ),
               Column(

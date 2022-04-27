@@ -201,14 +201,15 @@ class _MyHomePageState extends State<MyHomePage>
                     offset: Offset(0, 10))
               ]),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(0.0),
             child: Stack(
               children: [
                 Center(
                   child: Image.asset(
-                    'assets/images/one.png',
+                    'assets/images/f2.png',
                     fit: BoxFit.cover,
-                    width: 130,
+                    width:400,
+                    height: 450,
                   ),
                 ),
                 Column(
@@ -220,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage>
                         Text(
                           myItems[index].futsalName,
                           style: style.copyWith(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 22, fontWeight: FontWeight.bold, color: Colors.red),
                         ),
                         const Spacer(),
                       ],
@@ -231,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage>
                     Text(
                       myItems[index].location,
                       style: style.copyWith(
-                          fontSize: 18, fontWeight: FontWeight.normal),
+                          fontSize: 18, fontWeight: FontWeight.normal,),
                     ),
                     const Spacer(),
                     Text(

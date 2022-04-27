@@ -4,13 +4,14 @@ part 'futsal_arenas.g.dart';
 
 @JsonSerializable()
 class FutsalArenas {
+  int? futsalId;
   String futsalName, location, ownerEmail;
   bool isReserved, isDeleted;
 
   // String img, color;
   int cost;
 
-  FutsalArenas({required this.futsalName, required this.location, required this.ownerEmail, required this.cost,
+  FutsalArenas({required this.futsalId, required this.futsalName, required this.location, required this.ownerEmail, required this.cost,
       required this.isReserved, required this.isDeleted});
 
   factory FutsalArenas.fromJson(Map<String, dynamic> json) =>
